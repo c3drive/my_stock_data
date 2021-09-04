@@ -1,0 +1,4 @@
+version: "3"
+services:
+  my_lambda:
+    image: rust:latest
