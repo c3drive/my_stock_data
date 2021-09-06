@@ -13,6 +13,7 @@ apt-get update
 apt-get install -y docker-ce docker-ce-cli containerd.io
 #apt-cache madison docker-ce
 apt-get install -y docker-ce=5:20.10.8~3-0~debian-bullseye docker-ce-cli=5:20.10.8~3-0~debian-bullseye containerd.io
+# service docker start
 
 # AWS SAM CLI Install
 wget  -P /tmp https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip
