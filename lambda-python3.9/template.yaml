@@ -13,16 +13,42 @@ Globals:
 Resources:
   MyS3Bucket:
     Type: AWS::S3::Bucket
+    
   HelloWorldFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       PackageType: Image
+      #Handler: app.lambda_handler
+      ImageConfig:
+        Command:
+          - "app.lambda_handler"
+      Role: arn:aws:iam::428694349470:role/role-lambdaexec
       Events:
         HelloWorld:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /hello
             Method: get
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./hello_world
+      DockerTag: python3.9-v1
+
+  S3exampleFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      PackageType: Image
+      #Handler: s3example.lambda_handler
+      ImageConfig:
+        Command:
+          - "s3example.lambda_handler"
+      Role: arn:aws:iam::428694349470:role/role-lambdaexec
+      Events:
+        S3exampleEvent:
+          Type: S3
+          Properties:
+            Bucket: !Ref MyS3Bucket
+            Events: s3:ObjectCreated:*
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./hello_world
@@ -38,6 +64,9 @@ Outputs:
   HelloWorldFunction:
     Description: "Hello World Lambda Function ARN"
     Value: !GetAtt HelloWorldFunction.Arn
-  HelloWorldFunctionIamRole:
-    Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt HelloWorldFunctionRole.Arn
+  S3exampleFunction:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt S3exampleFunction.Arn
+  MyS3Bucket:
+    Description: "S3 for Prod stage for Hello World function"
+    Value: !GetAtt MyS3Bucket.Arn
