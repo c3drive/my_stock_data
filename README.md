@@ -79,4 +79,13 @@ $ sam build
 $ sam deploy --guided // if you do not use samconfig.toml.
 $ sam deploy // if you use samconfig.toml.
 ```
+
+
+## Unit tests
+
+```bash
+$ cd lambda-python3.9
+$ pip install pytest pytest-mock --user
+$ python -m pytest tests/ -v
+```
 General information about this SAM project can be found in the [`README.md`](./lambda-python3.9/README.md) file in lambda-python3.9 folder.

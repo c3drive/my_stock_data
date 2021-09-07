@@ -3,7 +3,7 @@ version = 0.1
 [default.deploy]
 [default.deploy.parameters]
 stack_name = "HelloWorld-Python"
-s3_bucket = "cf-templates-y9n0j1vbhsq-ap-northeast-1"
+s3_bucket = "my-work-general-bucket"
 image_repository = "428694349470.dkr.ecr.ap-northeast-1.amazonaws.com/helloworld-python"
 region = "ap-northeast-1"
 confirm_changeset = false
