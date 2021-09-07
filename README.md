@@ -38,8 +38,8 @@ version = 0.1
 [default.deploy]
 [default.deploy.parameters]
 stack_name = "HelloWorld-Python"
-s3_bucket = "xxxxxxxxxxxxxxxxxxxxxx-ap-northeast-1"
-image_repository = "xxxxxxxxxxxxxxxx/helloworld-python"
+s3_bucket = "xxxxxxxxxxxxxxxxxxxxxx"
+image_repository = "xxxxxxxxxxxxxxxx"
 region = "ap-northeast-1"
 confirm_changeset = true
 capabilities = ["CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_AUTO_EXPAND"]

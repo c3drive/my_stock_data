@@ -8,3 +8,7 @@ edition = "2018"
 
 [dependencies]
 lambda_runtime = "0.4"
+
+[[bin]]
+name = "hello"
+path = "src/main.rs"

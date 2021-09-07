@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  SAM Template for Rust
+  
+Resources:
+  HelloRustFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Zip
+      FunctionName: HelloRust
+      Handler: bootstrap.is.real.handler
+      #Runtime: provided # Amazon Linux
+      Runtime: provided.al2 # Amazon Linux 2
+      Role: arn:aws:iam::428694349470:role/role-lambdaexec
+      MemorySize: 512
+      CodeUri: .
+    Metadata:
+      BuildMethod: makefile
+    #イメージの場合
+    # PackageType: Image
+    # ImageConfig:
+    #    Command:
+    #      - "app.lambda_handler"
+    # Metadata:
+    #  Dockerfile: Dockerfile
+    #  DockerContext: ./hello_world
+    #  DockerTag: v1

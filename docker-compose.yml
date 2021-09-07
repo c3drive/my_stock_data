@@ -1,5 +1,6 @@
 version: "3"
 services:
   my_lambda:
-    image: rust:latest
+    #image: rust:latest
+    build: . # Dockrefileのパスを指定
     privileged: true
