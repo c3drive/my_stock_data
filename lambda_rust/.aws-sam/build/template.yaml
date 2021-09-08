@@ -1,0 +1,18 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'Sample rust application for Lambda
+
+  '
+Resources:
+  HelloRustFunctionImage:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: HelloRustImage
+      Role: arn:aws:iam::428694349470:role/role-lambdaexec
+      MemorySize: 512
+      PackageType: Image
+      ImageUri: hellorustfunctionimage:v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./stock_data
+      DockerTag: v1
