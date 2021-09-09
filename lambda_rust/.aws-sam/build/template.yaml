@@ -4,15 +4,15 @@ Description: 'Sample rust application for Lambda
 
   '
 Resources:
-  HelloRustFunctionImage:
+  HelloRustFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: HelloRustImage
+      FunctionName: HelloRust
       Role: arn:aws:iam::428694349470:role/role-lambdaexec
       MemorySize: 512
-      PackageType: Image
-      ImageUri: hellorustfunctionimage:v1
+      CodeUri: HelloRustFunction
+      PackageType: Zip
+      Runtime: provided.al2
+      Handler: bootstrap.is.real.handler
     Metadata:
-      Dockerfile: Dockerfile
-      DockerContext: ./stock_data
-      DockerTag: v1
+      BuildMethod: makefile

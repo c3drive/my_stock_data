@@ -4,37 +4,35 @@ Description: >
   Sample rust application for Lambda
   
 Resources:
-  HelloRustFunctionImage:
+  # HelloRustFunctionImage:
+    # Type: AWS::Serverless::Function
+    # Properties:
+    #   FunctionName: HelloRustImage
+    #   #Runtime: provided # Amazon Linux
+    #   Role: arn:aws:iam::428694349470:role/role-lambdaexec
+    #   MemorySize: 512
+      
+    # # イメージの場合
+    #   PackageType: Image
+    # # ImageConfig:
+    # #    Command:
+    # #      - "app.lambda_handler"
+    # Metadata:
+    #   Dockerfile: Dockerfile
+    #   DockerContext: ./stock_data
+    #   DockerTag: v1
+
+    # Zipの場合
+  HelloRustFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: HelloRustImage
+      FunctionName: HelloRust
       #Runtime: provided # Amazon Linux
       Role: arn:aws:iam::428694349470:role/role-lambdaexec
       MemorySize: 512
-      #CodeUri: .
-      
-    # イメージの場合
-      PackageType: Image
-    # ImageConfig:
-    #    Command:
-    #      - "app.lambda_handler"
+      CodeUri: ./stock_data
+      PackageType: Zip
+      Runtime: provided.al2 # Amazon Linux 2
+      Handler: bootstrap.is.real.handler
     Metadata:
-      Dockerfile: Dockerfile
-      DockerContext: ./stock_data
-      DockerTag: v1
-
-    # Zipの場合
-# Resources:
-#   HelloRustFunction:
-#     Type: AWS::Serverless::Function
-#     Properties:
-#       FunctionName: HelloRust
-#       #Runtime: provided # Amazon Linux
-#       Role: arn:aws:iam::428694349470:role/role-lambdaexec
-#       MemorySize: 512
-      #CodeUri: .
-      #PackageType: Zip
-      #Runtime: provided.al2 # Amazon Linux 2
-      #Handler: bootstrap.is.real.handler
-    #Metadata:
-      #BuildMethod: makefiles
+      BuildMethod: makefile

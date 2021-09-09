@@ -4,7 +4,7 @@ version = 0.1
 [default.deploy.parameters]
 stack_name = "Stock-Data-Rust-Image"
 s3_bucket = "my-work-general-bucket"
-image_repository = "428694349470.dkr.ecr.ap-northeast-1.amazonaws.com/helloworld-rust"
+#image_repository = "428694349470.dkr.ecr.ap-northeast-1.amazonaws.com/helloworld-rust"
 region = "ap-northeast-1"
 confirm_changeset = false
 capabilities = ["CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_AUTO_EXPAND"]
