@@ -1,0 +1,1973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="StockCharts.com's Web-based Financial Charting Tool" />
+    <meta name="keywords" content="Stock Chart, Technical Analysis, Stock Market, Stock Quote, Candlestick Chart, Indicator, Oscillator, Moving Average, RSI, MACD, CCI, PPO, stocks, charts, quotes, markets, commentary, technical, analysis, investing, personal finance, StockCharts.com" />
+
+    <title>$NIKK | SharpChart | StockCharts.com</title>
+
+    <meta property="og:url" content="https://stockcharts.com/h-sc/ui?s=$NIKK"/>
+    <meta property="og:image" content="https://stockcharts.com/c-sc/sc?s=$NIKK"/>
+    <meta property="og:title" content="$NIKK - Tokyo Nikkei Average - Nikkei 225 (EOD)" />
+    <meta property="og:description" content="SharpChart from StockCharts.com" />
+    <meta property="og:type" content="article" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="stockchartscom" />
+    <meta name="twitter:title" content="$NIKK - Tokyo Nikkei Average - Nikkei 225 (EOD)">
+    <meta name="twitter:description" content="SharpChart from StockCharts.com">
+    <meta name="twitter:image" content="https://stockcharts.com/c-sc/sc?s=$NIKK">
+    <link rel='shortcut icon' type='image/gif' href='//d.stockcharts.com/favicon.gif'/>
+<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900|Roboto+Condensed:400,400i,700" rel="stylesheet" />
+<link href="//d.stockcharts.com/css/lib/scc-icons-square.css" rel="stylesheet" type="text/css" />
+<link href="//d.stockcharts.com/css/scc-universal.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" type="text/css" href="//d.stockcharts.com/styles/com.stockcharts.workbench.sc/scui.css" media="all" />
+<link rel="stylesheet" type="text/css" href="//d.stockcharts.com/styles/com.stockcharts.workbench.sc/workbench.css" media="all" />
+<link rel="stylesheet" type="text/css" href="//d.stockcharts.com/styles/com.stockcharts.workbench.sc/scui_print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/redmond/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.css" />
+
+<style type="text/css">
+    .ios select {
+        height: 32px;
+    }
+    .ios input[type=text], .ios input[type=submit], .ios input[type=button], .ios .button, .ios button {
+        height: 30px;
+    }
+    #ChartNotesMenu {
+        width: 35px;
+        height: 100%;
+        background: #ffffff;
+        display:none;
+        left:0;
+    }
+    .ChartNotesContainer {
+        z-index: 7;
+        position: relative;
+    }
+    div.ui-datepicker{
+        font-size:10px;
+    }
+    div.ui-datepicker select {
+        color: slategray;
+    }
+    #cnHelpDialog td {border: 1px solid black;border-collapse:collapse;padding:1px}
+    .ui-dialog .ui-dialog-titlebar, .ui-dialog .ui-dialog-buttonpane { font-size: 0.8em; }
+
+    .sharpCharts2 .smlinput {
+        border: none;
+        width: 32px;
+        cursor: pointer;
+        text-align: center;
+        margin: 1px 0px;
+    }
+
+    .pagebody {font-family: Arial, Helvetica, sans-serif; font-size: small; font-style:normal; font-variant:normal; padding:0 8px; line-height:1.2; background: #fff; color: #000;}
+    .pagebody, .pagebody div, .pagebody ul, .pagebody ol, .pagebody li, .pagebody h1, .pagebody h2, .pagebody h3, .pagebody h4, .pagebody h5, .pagebody h6, .pagebody form, .pagebody fieldset, .pagebody input, .pagebody textarea, .pagebody p, .pagebody th, .pagebody td {margin:0; padding:0;}
+    .pagebody table, .pagebody select, .pagebody option, .pagebody th, .pagebody td, .pagebody textarea, .pagebody input {font-family:Arial, Helvetica, sans-serif; font-size:100%}
+    .pagebody h2, .pagebody h3, .pagebody h4, .pagebody h5, .pagebody h6, .pagebody p, .pagebody ol, .pagebody ul, .pagebody blockquote {margin-top:1em; margin-bottom:1em;}
+    .pagebody h1 {color:#1f6b95;font-weight: normal;}
+    .pagebody h2 {color:#000;font-weight: normal;}
+    .pagebody h3, .pagebody h4, .pagebody h5, .pagebody h6 {color:#444; color:rgba(0,0,0,0.75); font-weight: normal;}
+    .pagebody a {color: #1F6B95; text-decoration: none; cursor: pointer;}
+    .pagebody h2 a, .pagebody h3 a, .pagebody h4 a, .pagebody h5 a, .pagebody h6 a {color: inherit; text-decoration:none}
+    .pagebody a img {border: 0;}
+    .pagebody input, .pagebody textarea {padding:2px;}
+    .pagebody .checkbox, .pagebody .radio {position:absolute; display:block; margin:0; }
+    .pagebody .checkbox input[type=checkbox], .pagebody .checkbox-inline input[type=checkbox], .pagebody .radio input[type=radio], .pagebody .radio-inline input[type=radio] { position:absolute; margin:0; }
+    .pagebody .sharpCharts2 * { position:relative; }
+    .pagebody .workbench * { position:static; }
+    #pagebody .selectHidden, #pagebody .hidden, #pagebody .cellHidden span, #pagebody .fieldHidden, #pagebody .pulloutHidden, #pagebody .sectionHidden, #pagebody .sampleRow, #pagebody .newHidden { display:none; }
+    .sharpCharts2 .selectHidden#dataRange-predef, .sharpCharts2 .selectHidden#dataRange-userdef, .sharpCharts2 .selectHidden#dataRange-fill, .sharpCharts2 .selectHidden#symStyle-extras { display:none; }
+
+    @media print {
+        .pagebody {background:#fff;min-width:0;}
+        .pagebody h1 {color: #555}
+        .pagebody a {color: #555;text-decoration:underline;}
+    }
+    #pagebody .scc-sc2-content {
+        padding-top:1px;
+        min-width: 750px;
+    }
+    .workbench .w400 { margin: 1px; }
+    .pagebody .label, .pagebody label {
+        display: inline;
+        padding: 0 .25em 0 0;
+        font-size: 100%;
+        font-weight: 400;
+        line-height: 1em;
+        color: #000;
+        text-align: left;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: 0;
+    }
+    .pagebody div.label {display: block; }
+    .pagebody td.label {display:table-cell; vertical-align:middle; }
+    .pagebody td.label[align='right'] { text-align:right; }
+    #chartstyles-menu-max .thumbnail { margin-bottom:0px; }
+    .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset { font-size:11.4px; }
+    .clear { clear:left; height:0px; }
+    .pagebody table { border-spacing: 2px; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px; border-collapse: separate; }
+    .pagebody * { box-sizing:content-box; }
+    #pagebody .workbench * { line-height:normal; }
+    #pagebody .workbench table { margin-bottom:1px; }
+
+    #pagebody > table { margin-top:2px; }
+    #pagebody .sc2PromoHeader { padding: 0 5px 5px 5px; }
+
+    #permalinkCopySuccess { display:none; }
+    #permalink-copy, #linkableReload { height:auto; }
+
+    /* ------ */
+    /* MODALS */
+    /* ------ */
+    .pagebody .modal-dialog { margin:10px; font-family:'Lato','Helvetica Neue',Helvetica,Arial,sans-serif; }
+    /* MODAL HEADER */
+    .pagebody .modal-header { padding:10px; background:#4f5964; border-radius:4px 4px 0 0; -moz-border-radius:4px 4px 0 0; -webkit-border-radius:4px 4px 0 0; }
+    .pagebody .modal-header .close { outline:none !important; line-height:135%; color:#fff; opacity:0.5; }
+    .pagebody .modal-header .close:focus, .modal-header .close:hover { opacity:1.0; }
+    .pagebody .modal-title { font-size:20px; font-weight:bold; color:#fff; margin:0; }
+    .pagebody .modal-title i { margin-right:5px; }
+    /* MODAL BODY */
+    .pagebody .modal-body { padding:15px; text-align:center; }
+    .pagebody .modal-body p { margin:0 auto 15px auto; font-size:18px; font-weight:normal; color:#4f5964; }
+    .pagebody .modal-body .alert { margin:15px auto 0 auto; padding:15px; font-size:16px; }
+    .pagebody .modal-body .share-options { margin:0; }
+    .pagebody .modal-body .fa-stack { margin:0; font-size:30px; }
+    .pagebody .modal-body .share-label { display:block; margin:5px auto 0 auto; font-size:16px; font-weight:bold; color:#4f5964 !important; }
+    .pagebody .modal-body .form-group { margin:0 auto 20px auto; text-align:left; }
+    .pagebody .modal-body .form-group label.entryLabel { display:block; height:auto; vertical-align:middle; margin:0 0 5px 0; padding-left:5px; line-height:1.0; font-size:16px; font-weight:bold; color:#4f5964; }
+    /* FORM CONTROL */
+    .pagebody .modal-body input.form-control {
+        margin:0 auto;
+        height:55px;
+        width:100%;
+        padding-left:10px;
+        padding-right:10px;
+        outline:none !important;
+        box-shadow:none !important;
+        -webkit-appearance:none;
+        box-sizing:border-box;
+        -moz-box-sizing:border-box;
+        -webkit-box-sizing:border-box;
+        background-color:#fff;
+        border:2px solid #a9b2bc;
+        border-radius:5px;
+        -moz-border-radius:5px;
+        -webkit-border-radius:5px;
+        font-family:'Lato','Helvetica Neue',Helvetica,Arial,sans-serif;
+        font-size:18px;
+        font-weight:bold;
+        color:#4f5964;
+    }
+    .pagebody .modal-body input.form-control:focus { border-color:#707f8f; color:#000; }
+    /* BUTTON ROW */
+    .pagebody .modal-body .btn-row { margin:20px auto 0 auto; }
+    .pagebody .modal-body .btn-row button { margin:0 5px; padding:10px 25px; outline:none !important; box-shadow:none !important; box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; border:0; border-radius:50px; -moz-border-radius:50px; -webkit-border-radius:50px; font-size:16px; font-weight:normal; color:#fff !important; }
+    .pagebody .modal-body .btn-row button.btn-primary { background:#219155; font-weight:bold; }
+    .pagebody .modal-body .btn-row button.btn-default { background-color:#a9b2bc; color:#f1f2f4 !important; }
+    .pagebody .modal-body .btn-row button.btn-danger { background:#cc000e; font-weight:bold; }
+    .pagebody .modal-body .btn-row button.btn-primary:hover, .pagebody .modal-body .btn-row button.btn-primary:active, .pagebody .modal-body .btn-row button.btn-primary:focus { background:#26a65b; }
+    .pagebody .modal-body .btn-row button.btn-default:hover, .pagebody .modal-body .btn-row button.btn-default:active, .pagebody .modal-body .btn-row button.btn-default:focus { background:#707f8f !important; color:#fff !important; }
+    .pagebody .modal-body .btn-row button.btn-danger:hover, .pagebody .modal-body .btn-row button.btn-danger:active, .pagebody .modal-body .btn-row button.btn-danger:focus { background:#e6000f; }
+
+    /* MODALS MEDIA QUERIES */
+    @media (min-width:768px) {
+        .pagebody .modal-dialog {margin:75px auto 0 auto;}
+    }
+    @media (max-width:767px) {
+        .pagebody .modal-body p {max-width:225px;}
+        .pagebody .modal-body .col-btm { padding-top:15px; }
+        .pagebody .modal-body .btn-row button {display:block; margin:0 auto;}
+        .pagebody .modal-body .btn-row button.btn-default {margin-top:10px;}
+    }
+
+    /* share */
+    #email-iframe-modal { width:90%; }
+    @media (min-width:1000px) {
+        #email-iframe-modal { width:900px; }
+    }
+    @media (min-height:900px) {
+        #email-iframe-modal .modal-body { height:800px; }
+    }
+    @media (max-height:899px) {
+        #email-iframe-modal .modal-body { height: calc(90vh - 100px); }
+    }
+
+    #email-iframe-modal .modal-body { -webkit-overflow-scrolling:touch; overflow-y:scroll; }
+
+    #social-media-dialog { width:90%; }
+    @media (min-width:768px) {
+        #social-media-dialog { width:600px; }
+    }
+    @media (min-height:900px) {
+        #social-media-dialog .modal-body { height:600px; }
+    }
+    @media (max-height:899px) {
+        #social-media-dialog .modal-body { height: calc(90vh - 100px); }
+    }
+</STYLE>
+
+<!--[if lt IE 12]>
+<style type="text/css">html body{font-size:80%;}</style>
+<![endif]-->
+
+<!-- FONT AWESOME -->
+<script src="https://kit.fontawesome.com/192489156d.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//d.stockcharts.com/js/scc-universal.js" type="text/javascript"></script>
+<script>
+    // redirect to https if necessary
+    if (window.location.protocol == 'http:' && window.location.hostname != 'localhost') {
+        var url = 'https:' + window.location.href.substring(window.location.protocol.length);
+        window.location.href = url;
+    }
+</script>
+<script src="//d.stockcharts.com/styles/com.stockcharts.workbench.sc/scui.js?v=20200528" type="text/javascript" ></script>
+<script src='https://www.googletagservices.com/tag/js/gpt.js' async='async' type="text/javascript"></script>
+
+<script data-cfasync="false" type="text/javascript">
+    function noAds() {
+        var url = window.location.href;
+        return url.includes("noads") || url.includes("isjmmm");
+    }
+
+    var freestar = freestar || {};
+    var freestarDisplay = ! (isLoggedIn() || noAds());
+
+    if (freestarDisplay) {
+        freestar.hitTime = Date.now();
+        freestar.queue = freestar.queue || [];
+        freestar.config = freestar.config || {};
+        freestar.debug = window.location.search.indexOf('fsdebug') === -1 ? false : true;
+
+        // Tag IDs set here, must match Tags served in the Body for proper setup
+        freestar.config.enabled_slots = [
+        "stockcharts_300x250_300x600_Right_1",
+        "stockcharts_300x250_300x600_Right_2",
+        "stockcharts_300x250_Right_3"
+        ];
+
+        !function(a,b){var c=b.getElementsByTagName("script")[0],d=b.createElement("script"),e="https://a.pub.network/stockcharts-com";e+=freestar.debug?"/qa/pubfig.min.js":"/pubfig.min.js",d.async=!0,d.src=e,c.parentNode.insertBefore(d,c)}(window,document);
+    }
+    else {
+        $(document).ready(function(){
+            $('.freestar-dvrt').remove();
+            return;
+        });
+    }
+</script>
+
+<script>
+    // google analytics added 29-AUG-2017
+    window.ga = window.ga || function () {
+        (ga.q = ga.q || []).push(arguments);
+    };
+    ga.l = +new Date;
+    ga('create', 'UA-88248853-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+</head>
+
+<body id="page-top">
+    <ul id="notification-banners"></ul>
+
+    <!-- SCC NAVBAR -->
+    <nav id="scc-navbar" class="navbar navbar-inverse navbar-blue navbar-static-top">
+        <div class="container-fluid">
+            <!-- NAV UPPER -->
+            <div id="nav-upper" class="row">
+                <!-- NAVBAR BRAND -->
+                <a href="/" class="navbar-brand">
+                    <img src="//d.stockcharts.com/img/scc-logo-light.png" alt="StockCharts Logo" class="navbar-logo" />
+                    <img src="//d.stockcharts.com/img/scc-logo-icon.png" alt="StockCharts Icon" class="navbar-logo logo-icon" />
+                </a>
+                <!-- MENU TOGGLE -->
+                <div id="nav-menuToggle" class="nav navbar-nav">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-menuCollapse" aria-expanded="false" aria-controls="navbar-menuCollapse"><i class="fas fa-bars"></i></button>
+                </div>
+                <!-- ACCOUNT LINKS -->
+                <ul id="nav-accountLinks" class="nav navbar-nav">
+                    <li id="nav-loginBtn">
+                        <a href="/login" class="btn navbar-btn btn-transparent">Log In</a>
+                    </li>
+                    <li id="nav-signUpBtn">
+                        <a href="/checkout/freetrial/" class="btn navbar-btn btn-green">Free Trial</a>
+                    </li>
+                    <li id="nav-userProfile" class="dropdown">
+                        <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-fw fa-user-circle"></i><span id="nav-userID">Welcome</span><i class="far fa-fw fa-angle-down"></i>
+                        </a>
+                        <ul id="nav-userMenu" class="dropdown-menu">
+                            <li><a href="/def/servlet/Favorites.CServlet#chartlists"><i class="fas fa-fw fa-user-chart"></i>&nbsp;&nbsp;Your ChartLists</a></li>
+                            <li><a href="/def/servlet/ScanUI"><i class="fal fa-fw fa-sliders-h"></i>&nbsp;&nbsp;Your Scans</a></li>
+                            <li><a href="/h-mem/useralertsummary.html"><i class="far fa-fw fa-bell"></i>&nbsp;&nbsp;Your Alerts</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/youracct"><i class="fas fa-fw fa-cogs"></i>&nbsp;&nbsp;Your Account</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="https://support.stockcharts.com"><i class="fas fa-fw fa-question-circle"></i>&nbsp;&nbsp;Support Center</a></li>
+                            <li><a href="/support/techsupport.html"><i class="far fa-fw fa-envelope"></i>&nbsp;&nbsp;Contact Us</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/logout"><i class="fas fa-fw fa-sign-out-alt"></i>&nbsp;&nbsp;Log Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- CHART SEARCH -->
+                <form id="nav-chartSearch" class="input-group" role="search" aria-label="Chart Search" onsubmit="return chartSearch('nav-chartSearch');">
+                    <div class="input-group-btn dropdown">
+                        <button type="button" id="nav-chartSearch-btn" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            SharpChart <i class="far fa-angle-down"></i>
+                        </button>
+                        <input type="hidden" id="nav-chartSearch-type" name="searchoptions" value="sharpChart" />
+                        <ul class="dropdown-menu" id="nav-chartSearch-menu">
+                            <li>
+                                <a href="#" data-val="symSum">
+                                    <span class="item-label"><i class="far fa-file-invoice-dollar"></i>Symbol Summary</span>
+                                    <span class="item-star"><i class="far fa-star"></i></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-val="sharpChart">
+                                    <span class="item-label"><i class="icon icon-scc-pos-sq-sharp"></i>SharpChart</span>
+                                    <span class="item-star"><i class="far fa-star"></i></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-val="acp">
+                                    <span class="item-label"><i class="icon icon-scc-pos-sq-acp"></i>ACP</span>
+                                    <span class="item-star"><i class="far fa-star"></i></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-val="pnf">
+                                    <span class="item-label"><i class="icon icon-scc-pos-sq-pnf"></i>Point &amp; Figure</span>
+                                    <span class="item-star"><i class="far fa-star"></i></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-val="gallery">
+                                    <span class="item-label"><i class="icon icon-scc-pos-sq-gallery"></i>GalleryView</span>
+                                    <span class="item-star"><i class="far fa-star"></i></span>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="#" data-val="perf"><i class="icon icon-scc-pos-sq-perfchart"></i>PerfChart</a></li>
+                            <li><a href="#" data-val="candleGlance"><i class="icon icon-scc-pos-sq-candle"></i>CandleGlance</a></li>
+                            <li><a href="#" data-val="seasonality"><i class="icon icon-scc-pos-sq-season"></i>Seasonality</a></li>
+                            <li><a href="#" data-val="rrg"><i class="icon icon-scc-pos-sq-rrg"></i>RRG</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#" data-val="symSearch"><i class="fas fa-search-plus"></i>Symbol Lookup</a></li>
+                        </ul>
+                    </div>
+                    <input type="text" id="nav-chartSearch-input" class="form-control" placeholder="Enter Symbol or Name" aria-label="..." />
+                    <span class="input-group-btn">
+                        <button id="nav-chartSearch-submit" class="btn btn-default btn-submit" type="submit">Go</button>
+                    </span>
+                </form>
+            </div><!-- end of NAV UPPER -->
+            <!-- NAV LOWER -->
+            <div id="nav-lower">
+                <!-- MENU COLLAPSE -->
+                <div id="navbar-menuCollapse" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav sitelinks">
+                        <li><a href="/freecharts/">Charts &amp; Tools</a></li>
+                        <li><a href="/articles/">Articles</a></li>
+                        <li><a href="/tv/">StockCharts TV <span class="label label-tv-live">LIVE</span></a></li>
+                        <li><a href="https://school.stockcharts.com">ChartSchool</a></li>
+                        <li class="dashboard"><a href="/def/servlet/Favorites.CServlet">Your Dashboard</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav sitelinks pull-right">
+                        <li><a href="https://store.stockcharts.com">Store</a></li>
+                        <li><a href="https://support.stockcharts.com">Help</a></li>
+                    </ul>
+                    <div id="nav-siteSearch-wrap">
+                        <form id="nav-siteSearch" role="search" aria-label="Site Search" action="/search/">
+                            <input type="search" id="nav-siteSearch-input" placeholder="Search StockCharts" name="q" required />
+                            <input type="submit" id="nav-siteSearch-submit" value="Go" />
+                            <span id="nav-siteSearch-icon"></span>
+                        </form>
+                    </div>
+                </div><!-- end of MENU COLLAPSE -->
+            </div><!-- end of NAV LOWER -->
+        </div>
+    </nav><!-- end of SCC NAVBAR -->
+
+    <!-- ######## -->
+    <!-- PAGEBODY -->
+    <!-- ######## -->
+    <div id="pagebody" class="container-fluid pagebody">
+
+        <table width="100%" role="none">
+            <tr>
+                <td width="760px" valign="top">
+
+                    <!-- cyber monday banner -->
+                    <!--
+                    <div class="sc2PromoHeader">
+                        <a id="freeadlink" href="http://stockcharts.com/sales/index.html">
+                            <img id="freead" src="//stockcharts.com/img/workbench-holiday.png" alt="Subscribe for more charting power!"/>
+                        </a>
+                        <div class="clear">&nbsp;</div>
+                    </div>
+                    -->
+                    <!-- end cyber monday banner -->
+
+                    <!-- holiday banner -->
+                    <!--
+                    <div class="sc2PromoHeader">
+                        <a id="freeadlink" href="http://stockcharts.com/special/index.html">
+                            <img id="freead" src="//stockcharts.com/img/freead-holiday.gif" alt="Get 2 Free Months!"/>
+                        </a>
+                        <div class="clear">&nbsp;</div>
+                    </div>
+                    -->
+                    <!-- end holiday banner -->
+
+                    <!-- rotating banners -->
+                    <div class="sc2PromoHeader">
+                        <a id="freeadlink" href="/sales/index.html">
+                           <img id="freead" src="//d.stockcharts.com/img/spacer.gif" alt="Subscribe for more charting power!"/>
+                        </a>
+                        <div class="clear">&nbsp;</div>
+                    </div>
+                    <script type="text/javascript">
+                        var r = Math.floor(Math.random()*10);
+                        document.getElementById('freead').src="//d.stockcharts.com/img/freead"+r+".gif";
+                        document.getElementById('freeadlink').href="/sales/index.html?ad=freead"+r;
+                    </script>
+                    <!-- end rotating banners -->
+
+
+
+                    <div id="content" class="scc-sc2-content">
+
+
+    <div id="sharpCharts2" class="sharpCharts2">
+
+<form name="workbench" method="post" action="#" >
+
+  <input type="hidden" name="nIndicators" value="2" />
+  <input type="hidden" name="nOverlays" value="2" />
+  <input type="hidden" name="nMaxOverlays" value="3" />
+  <input type="hidden" name="nMaxIndicators" value="3" />
+  <input type="hidden" name="predefChanged" value="false" />
+  <input type="hidden" name="isPermanentId" value="true" />
+  <input type="hidden" name="setPermanentId" value="false" />
+  <input type="hidden" name="defaultChart" value="true" />
+  <input type="hidden" name="chartId" value="0" />
+  <input type="hidden" name="style" value="" />
+  <input type="hidden" name="dataTotalDays" value="0" />
+  <input type="hidden" name="inputsymbol" value="$NIKK" />
+  <input type="hidden" name="originalsymbol" value="$NIKK" />
+  <input type="hidden" name="inputperiod" value="D" />
+  <input type="hidden" name="originalperiod" value="D" />
+  <input type="hidden" name="currentSetting" value="0|||" />
+  <input type="hidden" name="curCustomSetting" value="0|||" />
+  <input type="hidden" name="customSettingsCount" value="0" />
+  <input type="hidden" name="curChartList" value="" />
+  <input type="hidden" name="curChartListName" value="" />
+  <input type="hidden" name="curChartName" value="" />
+  <input type="hidden" name="curChartNameIndex" value="0" />
+  
+
+  <input type="hidden" name="isDeveloper" value="false" />
+
+
+<input type="hidden" name="companyname" value="Tokyo Nikkei Average - Nikkei 225 (EOD)" />
+<input type="hidden" name="ipaddress" value="153.201.102.118" />
+<input type="hidden" name="chartcode" value="" />
+
+<input type="hidden" name="skinColorPageBg"       value="ffffff" />
+<input type="hidden" name="skinColorGridBg"       value="ffffff" />
+<input type="hidden" name="skinColorGridBgStripe" value="" />
+<input type="hidden" name="skinColorBorder"       value="C7C7C7" />
+<input type="hidden" name="skinColorText"         value="000000" />
+<input type="hidden" name="skinColorCandles"      value="000000" />
+
+            
+                              
+<input type="hidden" name="chartString" value="s=%24NIKK&p=D&b=5&g=0&id=0&r=1631511353763" />
+
+      <div class='workbench'>
+    <div class='roundedbox rmar5 bmar1 lmar5 rpad5 lpad5'>
+        <table role="none">
+                <tr>
+                <td>
+                    <div class='small label'>Symbol</div>
+                </td>
+                <td class='lpad5' colspan='5'>
+                    <div class='small label'>Period</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type='text' id='symbol' name='symbol' size='14' autocomplete='on' autocorrect='off' autocapitalize='off' spellcheck='false' value="$NIKK" />
+                </td>
+                <td class='lpad5'>
+                          <select name="period" id="period" class="" onchange="setTemporaryId();submitPeriod();">
+              <option value='D' selected="selected">Daily</option>
+                <option value='W'>Weekly</option>
+        </select>
+                </td>
+                <td class='lpad10'>
+                    <input class='button' type='submit' id='submitButton' value='Update' onclick='return submitIt();' />
+                </td>
+                                <td class='lpad10 inspector' valign='middle'>
+                    <span class='search icon'></span>
+                </td>
+                <td class='label inspector' valign='middle'>
+                    Inspect
+                </td>
+                <td class='inspector' valign='middle'>
+                    <input type='checkbox' id='useInspector' name='useInspector' value='true'   onclick='toggleInspectorVsRefresh(this);toggleInspector();' />
+                </td>
+                                <td class='lpad10 label'><span id='useBackgroundThemeLabel'>Skin</span></td>
+                <td width='100%' valign='middle'>
+                    <input type='checkbox' id='useBackgroundTheme' name='useBackgroundTheme' value='true'   onchange='manageBackgroundThemeCookie(); submitIt();' />
+                </td>
+            </tr>
+        </table>  
+    </div>
+</div>
+  
+  <div class="chartImg-container">
+
+      <script type="text/javascript">
+        var chartImgSrc = "//stockcharts.com/c-sc/sc?s=%24NIKK&p=D&b=5&g=0&i=0";
+     </script>
+
+    <input type="hidden" id="chartImgSrc" value="//stockcharts.com/c-sc/sc?s=%24NIKK&p=D&b=5&g=0&i=0"/>
+        
+    <div class='ChartNotesContainer'>
+        <table height=100% style="border-collapse: collapse">
+            <tr bgcolor='#FFFFFF'>
+                <td valign='top'>
+                    <div id='ChartNotesMenu'></div>
+                </td>
+                <td valign='top'>
+                    <img class="chartimg" id="chartImg" src="//stockcharts.com/c-sc/sc?s=%24NIKK&p=D&b=5&g=0&i=0&r=1631511353763" crossorigin="use-credentials" />
+                    <div style='display:none' id="debug"></div>
+                </td>
+            </tr>
+        </table>
+   </div>
+  
+
+  </div>
+
+  <div class='workbench'>
+  <div class='roundedbox tmar5 rmar5 bmar5 lmar5 rpad5 lpad5'>  
+    <table role="none">
+      <tr>
+        <td><a href="#" onclick="toggleAnnotate();return false;"><span class='pencil blue icon'></span>Annotate</a></td>
+        <td class='lpad15'><a href="#" onclick="printVersion('/h-sc/ui?s=%24NIKK&p=D&b=5&g=0&id=0&r=1631511353763&cmd=print');return false;"><span class='print blue icon'></span>Print</a></td>
+        <td class='lpad15'>
+            <span class="share blue icon"></span>
+            <span id="shareThisChartWrapper">
+                <a href="#" id="shareThisChart" onclick="getJsonParams('s=%24NIKK&p=D&b=5&g=0&id=0&r=1631511353763');return false;">Share</a>
+            </span>
+        </td>
+        <td class='lpad15'>
+            <span id="linkChartJson" title="s=%24NIKK&p=D&b=5&g=0&id=0&r=1631511353763" class="bookmark blue icon"></span>
+            <span id="linkThisChartWrapper">
+                <a id="linkChart" href="#" onclick="getJsonParams('s=%24NIKK&p=D&b=5&g=0&id=0&r=1631511353763');return false;">Permalink</a>
+            </span>
+        </td>
+                <td class='lpad15'><a href="//support.stockcharts.com/doku.php?id=sharpcharts"><span class='info blue icon'></span>Instructions</a></td>
+        <td class='lpad15'><a href="#" onclick="getFeedback('/h-sc/ui?s=%24NIKK&p=D&b=5&g=0&id=0&r=1631511353763&cmd=feedback');return false;"><span class='question blue icon'></span>Report&nbsp;Problems</a></td>
+      </tr> 
+    </table>
+  </div>
+</div>
+
+
+  <div id="section2" class="section">
+    <div id="section2Long" class="sectionLong">
+      <h2>Chart Attributes</h2>
+
+      <span class="formEl"><label for="period2">Period</label>
+          <!-- 'D' -->
+      <select name="period2" id="period2" onchange="setTemporaryId();submitPeriod2();">
+              <option value='D' selected="selected">Daily</option>
+                <option value='W'>Weekly</option>
+        </select>
+      </span>
+      <span class="formEl"><label for="dataRange">Range</label>
+          <!-- 'fill' -->
+      <select name="dataRange" id="dataRange" onchange="setTemporaryId();if (!set_ymd(this)){setPredefChanged();changeSelectFields(this);};">
+              <option value='fill' selected="selected">Fill the Chart</option>
+                <option value='predef'>Predefined Range</option>
+                <option value='predef:0|1|0'>&nbsp; 1 Month</option>
+                <option value='predef:0|3|0'>&nbsp; 3 Months</option>
+                <option value='predef:0|6|0'>&nbsp; 6 Months</option>
+                <option value='predef:1|0|0'>&nbsp; 1 Year</option>
+                <option value='predef:2|0|0'>&nbsp; 2 Years</option>
+                <option value='predef:3|0|0'>&nbsp; 3 Years</option>
+                <option value='predef:5|0|0'>&nbsp; 5 Years</option>
+                <option value='userdef'>Select Start/End</option>
+                <option value='userdef:ytd'>&nbsp; Year-to-Date</option>
+        </select>
+      </span>
+
+
+      <div id="dataRange-fill" class="selectHidden" >
+        <span class="formEl"><label for="bar">Bar</label>
+            <!-- '5' -->
+      <select name="bar" id="bar" onchange="setTemporaryId();;">
+              <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5' selected="selected">5</option>
+                <option value='6'>6</option>
+                <option value='7'>7</option>
+                <option value='8'>8</option>
+                <option value='9'>9</option>
+        </select>
+        </span>
+        <span class="formEl"><label for="gap">Gap</label>
+            <!-- '0' -->
+      <select name="gap" id="gap" onchange="setTemporaryId();;">
+              <option value='0' selected="selected">0</option>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+        </select>
+        </span>
+	    <span class="formEl"><label for="bars-fill">Extra Bars</label>
+          <input type="text" id="bars-fill" name="bars-fill" size="6" value="" onchange="setTemporaryId()" />
+        </span> 
+      </div>
+
+
+      <div id="dataRange-predef" class="selectHidden">
+        <span class="formEl"><label for="years">Years</label>
+            <!-- '0' -->
+      <select name="years" id="years" onchange="resetRange(this,'predef'); setTemporaryId();">
+              <option value='0' selected="selected">0</option>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+        </select>
+        </span>
+        <span class="formEl"><label for="months">Months</label>
+            <!-- '6' -->
+      <select name="months" id="months" onchange="resetRange(this,'predef'); setTemporaryId();">
+              <option value='0'>0</option>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+                <option value='6' selected="selected">6</option>
+                <option value='7'>7</option>
+                <option value='8'>8</option>
+                <option value='9'>9</option>
+                <option value='10'>10</option>
+                <option value='11'>11</option>
+        </select>
+        </span>
+        <span class="formEl"><label for="days">Days</label>  
+            <!-- '0' -->
+      <select name="days" id="days" onchange="resetRange(this,'predef'); setTemporaryId();">
+              <option value='0' selected="selected">0</option>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+                <option value='6'>6</option>
+                <option value='7'>7</option>
+                <option value='8'>8</option>
+                <option value='9'>9</option>
+                <option value='10'>10</option>
+                <option value='11'>11</option>
+                <option value='12'>12</option>
+                <option value='13'>13</option>
+                <option value='14'>14</option>
+                <option value='15'>15</option>
+                <option value='16'>16</option>
+                <option value='17'>17</option>
+                <option value='18'>18</option>
+                <option value='19'>19</option>
+                <option value='20'>20</option>
+                <option value='21'>21</option>
+                <option value='22'>22</option>
+                <option value='23'>23</option>
+                <option value='24'>24</option>
+                <option value='25'>25</option>
+                <option value='26'>26</option>
+                <option value='27'>27</option>
+                <option value='28'>28</option>
+                <option value='29'>29</option>
+                <option value='30'>30</option>
+        </select>
+        </span>
+	    <span class="formEl"><label for="bars-predef">Extra Bars</label>
+          <input type="text" id="bars-predef" name="bars-predef" size="6" value="" onchange="setTemporaryId()" />
+        </span>      
+      </div>
+
+
+      <div id="dataRange-userdef" class="selectHidden">
+        <span class="formEl"><label for="start">Start</label>
+          <input type="text" id="start" name="start" size="9" value="" onchange="setTemporaryId();" />
+        </span>
+        <span class="formEl"><label for="end">End</label>
+          <input type="text" id="end" name="end" size="9" value="" onchange="setTemporaryId();" />
+        </span>
+	    <span class="formEl"><label for="bars-userdef">Extra Bars</label>
+          <input type="text" id="bars-userdef" name="bars-userdef" size="6" value="" onchange="setTemporaryId()" />
+        </span>      
+        <span class="formEl"><label for="ranger">&nbsp;</label>
+          <div id="ranger" tabindex="0" style="outline: none;"></div>
+        </span>
+      </div>
+
+      <div class="clear">&nbsp;</div>
+  
+      <div class="formEl"><label for="symStyle">Type</label>
+          <!-- 'type="candle"' -->
+      <select name="symStyle" id="symStyle" onchange="setTemporaryId();changeSelectFields(this);;">
+              <option value='type="candle"' selected="selected">Candlesticks</option>
+                <option value='type="ohlc"'>OHLC Bars</option>
+                <option value='type="ohlc" args="thick"'>OHLC Bars (thick)</option>
+                <option value='type="hlc"'>HLC Bars</option>
+                <option value='type="hlc" args="thick"'>HLC Bars (thick)</option>
+                <option value='type="line" args="1.5,solid"'>Solid Line</option>
+                <option value='type="line" args="1.0,solid"'>Solid Line (thin)</option>
+                <option value='type="line" args="2.0,solid"'>Solid Line (thick)</option>
+                <option value='type="line" args="1.5,dashed"'>Dashed Line</option>
+                <option value='type="line" args="1.0,dashed"'>Dashed Line (thin)</option>
+                <option value='type="line" args="2.0,dashed"'>Dashed Line (thick)</option>
+                <option value='type="dots"'>Dots</option>
+                <option value='type="area" args="0.0,0.0"'>Area</option>
+                <option value='type="hist" args="0.0,0.0"'>Histogram</option>
+                <option value='type="equivolume"'>EquiVolume</option>
+                <option value='type="candlevolume"'>CandleVolume</option>
+                <option value='type="armscandlevolume"'>Arms CandleVolume</option>
+                <option value='type="heikin"'>Heikin-Ashi</option>
+                <option value='type="tlb"'>Three Line Break</option>
+                <option value='type="kagi"'>Kagi</option>
+                <option value='type="renko"'>Renko</option>
+                <option value='type="invisible"'>Invisible</option>
+                <option value='type="cumulative" args="1.5,solid"'>Cumulative</option>
+                <option value='type="performance" args="1.5,solid"'>Performance</option>
+                <option value='type="ohlcelder"'>Elder Impulse System</option>
+        </select>
+        <div id="symStyle-renko" class="selectHidden">
+          &nbsp;
+          <span class="noSpaceLine">
+              <span class="formEl field1"><label for="renkoBoxSize">Box:</label>
+                    <!-- 'atr' -->
+      <select name="renkoUnit" id="renkoUnit" onchange="setArgsOther(this);setTemporaryId();;">
+              <option value='point'>Pts</option>
+                <option value='atr' selected="selected">ATR</option>
+        </select>
+              </span>
+              <span class="formEl field2">
+                  <input type="text" id="renkoBoxSize" name="renkoBoxSize" value="14" size="4" onchange="setTemporaryId()"/>
+              </span>
+              <span class="formEl field3"><label for="renkoPriceField">Field:</label>
+                    <!-- 'close' -->
+      <select name="renkoPriceField" id="renkoPriceField" onchange="setTemporaryId();;">
+              <option value='hilo'>High/Low</option>
+                <option value='close' selected="selected">Close</option>
+        </select>
+              </span>
+          </span>
+        </div>
+        <div id="symStyle-kagi" class="selectHidden">
+          &nbsp;
+          <span class="noSpaceLine">
+              <span class="formEl field1"><label for="kagiReversal">Reversal:</label>
+                    <!-- 'atr' -->
+      <select name="kagiUnit" id="kagiUnit" onchange="setArgsOther(this);setTemporaryId();;">
+              <option value='point'>Pts</option>
+                <option value='percent'>%</option>
+                <option value='atr' selected="selected">ATR</option>
+        </select>
+              </span>
+              <span class="formEl field2">
+                  <input type="text" id="kagiReversal" name="kagiReversal" value="14" size="4" onchange="setTemporaryId()" />
+              </span>
+              <span class="formEl field3"><label for="kagiPriceField">Field:</label>
+                    <!-- 'hilo' -->
+      <select name="kagiPriceField" id="kagiPriceField" onchange="setTemporaryId();;">
+              <option value='hilo' selected="selected">High/Low</option>
+                <option value='close'>Close</option>
+        </select>
+              </span>
+          </span>
+        </div>
+      </div>
+
+
+      <div id="chartSize-container" class="formEl"><label for="chartSize">Size</label>
+          <!-- '700' -->
+      <select name="chartSize" id="chartSize" onchange="setTemporaryId();changeSelectFields(this);;">
+              <option value='360'>360</option>
+                <option value='460'>460</option>
+                <option value='520'>520</option>
+                <option value='620'>620</option>
+                <option value='700' selected="selected">700</option>
+                <option value='780'>780</option>
+                <option value='900'>900</option>
+                <option value='Portrait'>Portrait</option>
+                <option value='Landscape'>Landscape</option>
+        </select>
+        <div id="chartSize-custom" class="selectHidden">
+          &nbsp;
+          <span class="noSpaceLine">
+            <span class="formEl"><label for="customWidth">Width:</label>
+	          <input type="text" id="customWidth" name="customWidth" value="700" size="5" onchange="setTemporaryId()"/>
+	        </span>
+	        <span class="formEl"><label for="customHeight">Height:</label>
+	          <input type="text" id="customHeight" name="customHeight" value="530" size="5" onchange="setTemporaryId()"/>
+	        </span>
+          </span>
+        </div>
+      </div>
+
+
+
+          <span class="formEl"><label for="chartSkin">Color&nbsp;Scheme</label>
+          <!-- 'default' -->
+      <select name="chartSkin" id="chartSkin" onchange="setTemporaryId();changeSelectFields(this);submitIt();;">
+              <option value='default' selected="selected">Default</option>
+                <option value='blue'>Blue</option>
+                <option value='bluegray'>Blue Gray</option>
+                <option value='colorblind'>Color Vision Impaired</option>
+                <option value='darkamber'>Dark Amber</option>
+                <option value='darkblue'>Dark Blue</option>
+                <option value='darkgray'>Dark Gray</option>
+                <option value='darkgreen'>Dark Green</option>
+                <option value='ice'>Ice</option>
+                <option value='graphite'>Graphite</option>
+                <option value='mint'>Mint</option>
+                <option value='mohave'>Mohave</option>
+                <option value='monochrome'>Monochrome (Print)</option>
+                <option value='murphy'>Murphy</option>
+                <option value='night'>Night</option>
+                <option value='rainier'>Rainier</option>
+                <option value='rose'>Rose</option>
+                <option value='sand'>Sand</option>
+                <option value='seagreen'>Sea Green</option>
+                <option value='solar'>Solar</option>
+                <option value='spruce'>Spruce</option>
+                <option value='sunset'>Sunset</option>
+                <option value='vanilla'>Vanilla</option>
+                <option value='dpblue'>DP Blue</option>
+                <option value='dpcoral'>DP Coral</option>
+                <option value='dpgold'>DP Gold</option>
+                <option value='dpgreen'>DP Green</option>
+                <option value='dpplum'>DP Plum</option>
+                <option value='dpyellow'>DP Yellow</option>
+        </select>
+      </span>
+    
+
+        <span class="formEl"><label for="symUpColor">Up Color</label>
+                <select class="colorList" name="symUpColor"  id="symUpColor" onchange="setTemporaryId();">
+  
+  <option style="color:#000000;" value='auto'>- Auto -</option>
+
+                              <option style="color:#00008b;" value='0'>blue</option>
+                                                <option style="color:#d00631;" value='1'>red</option>
+                                                <option style="color:#006400;" value='2'>green</option>
+                                                <option style="color:#ff00ff;" value='3'>pink</option>
+                                                <option style="color:#8a2be2;" value='4'>purple</option>
+                                                <option style="color:#ff6600;" value='5'>orange</option>
+                                                <option style="color:#a0522d;" value='6'>brown</option>
+                                                <option style="color:#daa520;" value='7'>gold</option>
+                                                <option style="color:#809099;" value='8'>gray</option>
+                                                <option style="color:#000000;" value='9'>black</option>
+                                                <option style="color:#12FEFF;" value='10'>cyan</option>
+                                                <option style="color:#08FE04;" value='11'>lime</option>
+                      </select>
+        </span>
+        <span class="formEl"><label for="symDownColor">Down Color</label>
+                <select class="colorList" name="symDownColor"  id="symDownColor" onchange="setTemporaryId();">
+  
+  <option style="color:#000000;" value='auto'>- Auto -</option>
+
+                              <option style="color:#00008b;" value='0'>blue</option>
+                                                <option style="color:#d00631;" value='1'>red</option>
+                                                <option style="color:#006400;" value='2'>green</option>
+                                                <option style="color:#ff00ff;" value='3'>pink</option>
+                                                <option style="color:#8a2be2;" value='4'>purple</option>
+                                                <option style="color:#ff6600;" value='5'>orange</option>
+                                                <option style="color:#a0522d;" value='6'>brown</option>
+                                                <option style="color:#daa520;" value='7'>gold</option>
+                                                <option style="color:#809099;" value='8'>gray</option>
+                                                <option style="color:#000000;" value='9'>black</option>
+                                                <option style="color:#12FEFF;" value='10'>cyan</option>
+                                                <option style="color:#08FE04;" value='11'>lime</option>
+                      </select>
+        </span>
+
+        <span class="formEl"><label for="legends">Legends</label>
+              <!-- 'DEFAULT' -->
+      <select name="legend" id="legend" onchange="setTemporaryId();">
+              <option value='OFF'>Off</option>
+                <option value='MINIMAL'>Minimal</option>
+                <option value='DEFAULT' selected="selected">Default</option>
+                <option value='VERBOSE'>Verbose</option>
+        </select>
+        </span>
+      <div class="clear">&nbsp;</div>
+      <div class="volumeRow">
+        <span class="formEl"><label for="showVolume">Volume:</label>
+            <!-- 'overlay' -->
+      <select name="showVolume" id="showVolume" onchange="setTemporaryId();">
+              <option value='overlay' selected="selected">Overlay</option>
+                <option value='separate'>Separate</option>
+                <option value='off'>Off</option>
+        </select>
+        </span> 
+        <span class="formEl checkbox">
+	      <input type="checkbox" id="fullQuote" name="fullQuote" value="true"  onchange="setTemporaryId();" />
+	      <label for="fullQuote">Full<br />Quote</label>
+	    </span> 
+        <span class="formEl checkbox">
+	      <input type="checkbox" id="priceLabels" name="priceLabels" value="true"  onchange="setTemporaryId();" />
+	      <label for="priceLabels">Price<br />Labels</label>
+	    </span> 
+        <span class="formEl checkbox">
+	      <input type="checkbox" id="dataLog" name="dataLog" value="true" checked="checked" onchange="setTemporaryId();" />
+          <label for="dataLog">Log<br />Scale</label>
+        </span> 
+
+        <span class="formEl checkbox">
+          <input type="checkbox" id="solidCandles" name="solidCandles" value="true"  onchange="setTemporaryId();"/>
+          <label for="solidCandles">Solid<br/>Candles</label>
+        </span> 
+
+        <span class="formEl checkbox">
+	      <input type="checkbox" id="dataSignalV" name="dataSignalV" value="sig" checked="checked" onchange="setTemporaryId();" />
+	      <label for="dataSignalV">Color<br />Volume</label>
+	    </span>
+
+        <span class="formEl checkbox">
+	      <input type="checkbox" id="antiAliasOn" name="antiAliasOn" value="true" checked="checked" onchange="setTemporaryId();" />
+	      <label for="antiAliasOn">Smoothed<br/>Lines</label>
+	    </span> 
+        <span class="formEl checkbox">
+	      <input type="checkbox" id="axisLabels" name="axisLabels" value="true" checked="checked" onchange="setTemporaryId();" />
+	      <label for="axisLabels">Y-Axis<br/>Labels</label>
+	    </span> 
+        <span class="formEl checkbox">
+          <input type="checkbox" id="zoomThumbnail" name="zoomThumbnail" value="true"  onchange="setTemporaryId();" />
+          <label for="zoomThumbnail">Zoom<br/>Thumbnail</label>
+        </span> 
+        <span class="formEl checkbox">
+          <input type="checkbox" id="extendedHours" name="extendedHours" value="true"  onchange="setTemporaryId();" />
+          <label for="extendedHours">Extended<br/>Hours</label>
+        </span> 
+
+      </div>
+
+      <div class="clear">&nbsp;</div>
+
+      <span class='workbench'><input type="button" class="button" value="Update" onclick="submitIt();" /></span>
+    
+   </div>
+  </div>
+
+
+  <div id="section3" class="section">
+    <div id="section3Long" class="sectionLong">
+      <table id="overStyles" cellspacing="0" summary="Overlays">
+      <caption>Overlays</caption>
+      <tr class="formLabels">
+        <th class="noPullout"><h2>Overlays</h2></th>
+        <th class="noPullout"><span>Parameters</span></th>
+              </tr>
+      <tr id="overSampleRow" class="sampleRow">
+        <td class="formEl">
+            <!-- '0' -->
+      <select name="overType_" id="overType_" onchange="setArgsO(this);setTemporaryId();">
+              <option value='B'>- None -</option>
+                <option value='BB'>Bollinger Bands</option>
+                <option value='HL'>Horizontal Line</option>
+                <option value='ICHIMOKU2'>Ichimoku Cloud</option>
+                <option value='ICHIMOKU'>Ichimoku Cloud (full)</option>
+                <option value='KELT'>Keltner Channels</option>
+                <option value='SMA'>Simple Moving Avg</option>
+                <option value='EMA'>Exp. Moving Avg</option>
+                <option value='KAMA'>Kaufman's Moving Avg</option>
+                <option value='ENV'>SMA Envelopes</option>
+                <option value='EMAENV'>EMA Envelopes</option>
+                <option value='EVENTS'>Events</option>
+                <option value='SAR'>Parabolic SAR</option>
+                <option value='CHANDLR'>Chandelier Exits</option>
+                <option value='PIVOTS'>Pivot Points</option>
+                <option value='CHAN'>Price Channels</option>
+                <option value='PRICE'>Price (same scale)</option>
+                <option value='VOLHORIZ'>Volume by Price</option>
+                <option value='VWAP'>VWAP</option>
+                <option value='ZIGZAG'>ZigZag</option>
+                <option value='RETRACE'>ZigZag (retrace)</option>
+        </select>
+        </td>
+        <td class="formEl">
+          <input type="text" id="overArgs_" name="overArgs_" size="15" value="" onchange="setTemporaryId()" />
+        </td>
+              </tr>
+     </table>
+
+     <div class='workbench'>
+       <div class='tmar5'>
+         <input type="button" class="button rmar10" value="Update" onclick="submitIt();" />
+         <a href="#" onclick="clearOverlays();">Clear All</a>
+       </div>
+     </div>
+
+   </div>
+  </div>
+
+
+  <div id="section4" class="section">
+    <div id="section4Long" class="sectionLong">
+      <table id="indStyles" cellspacing="0" summary="Indicators">
+      <caption>Indicators</caption>
+      <tr class="formLabels">
+        <th class="noPullout"><h2>Indicators</h2></th>
+        <th class="noPullout"><span>Parameters</span></th>
+        <th class="noPullout"><span>Position</span></th>
+              </tr>
+      <tr id="indSampleRow" class="sampleRow">
+        <td class="formEl">
+            <!-- '0' -->
+      <select name="indType_" id="indType_" onchange="setArgsI(this); setTemporaryId();">
+              <option value='B'>- None -</option>
+                <option value='ACCDIST'>Accum/Distribution Line</option>
+                <option value='AROON'>Aroon</option>
+                <option value='AROONOSC'>Aroon Oscillator</option>
+                <option value='ADXLINE'>ADX Line</option>
+                <option value='ADX'>ADX Line (w/+DI and -DI)</option>
+                <option value='ATR'>Avg True Range (ATR)</option>
+                <option value='BBWIDTH'>Bollinger Band Width</option>
+                <option value='BBPCT'>Bollinger %B</option>
+                <option value='CCI'>Commodity Channel Index (CCI)</option>
+                <option value='CORR'>Correlation</option>
+                <option value='CMF'>Chaikin Money Flow (CMF)</option>
+                <option value='COSC'>Chaikin Oscillator</option>
+                <option value='COPP'>Coppock Curve</option>
+                <option value='CTM'>Chande Trend Meter</option>
+                <option value='TIMESCALE'>Date/Time Axis</option>
+                <option value='DPO'>Detrended Price (DPO)</option>
+                <option value='DIVIDENDS'>Dividends</option>
+                <option value='EMV'>Ease of Movement (EMV)</option>
+                <option value='FORCE'>Force Index</option>
+                <option value='MACD'>MACD</option>
+                <option value='MACDHIST'>MACD Histogram</option>
+                <option value='MASS'>Mass Index</option>
+                <option value='MFI'>Money Flow Index (MFI)</option>
+                <option value='NVI'>Negative Volume Index (NVI)</option>
+                <option value='OBV'>On Balance Volume (OBV)</option>
+                <option value='PPO'>Pct Price Oscillator (PPO)</option>
+                <option value='PVO'>Pct Volume Oscillator (PVO)</option>
+                <option value='PRICE'>Price</option>
+                <option value='PRICEPERF'>Price - Performance</option>
+                <option value='PAIR'>Price - Up/Down Pair</option>
+                <option value='PMO'>Price Momentum Osc. (PMO)</option>
+                <option value='KST'>Pring's Know Sure Thing (KST)</option>
+                <option value='SPECIALK'>Pring's Special K</option>
+                <option value='RRG'>RRG Relative Strength</option>
+                <option value='RSI'>RSI</option>
+                <option value='ROC'>Rate of Change (ROC)</option>
+                <option value='SCTR'>SCTR Line</option>
+                <option value='LINREGSLOPE'>Slope (Linear Regression)</option>
+                <option value='STDDEV'>Standard Deviation</option>
+                <option value='STOFULL'>Full Stochastics</option>
+                <option value='STOSLOW'>Slow Stochastics</option>
+                <option value='STOFAST'>Fast Stochastics</option>
+                <option value='STORSI'>Stochastics RSI</option>
+                <option value='TRIX'>TRIX</option>
+                <option value='TSI'>True Strength Index (TSI)</option>
+                <option value='UI'>Ulcer Index (UI)</option>
+                <option value='ULT'>Ultimate Oscillator</option>
+                <option value='VOL'>Volume</option>
+                <option value='VTX'>Vortex Indicator</option>
+                <option value='WMR'>Williams %R</option>
+        </select>
+        </td>
+        <td class="formEl">
+          <input type="text" id="indArgs_" name="indArgs_" size="12" value="" onchange="setTemporaryId()" /></td>
+        <td class="formEl">
+            <!-- 'below' -->
+      <select name="indLoc_" id="indLoc_" onchange="setLoc(this); setTemporaryId();">
+              <option value='above'>Above</option>
+                <option value='behind'>Behind Price</option>
+                <option value='below' selected="selected">Below</option>
+        </select>
+        </td>
+              </tr>  
+     </table>
+
+     <div class='workbench'>
+       <div class='tmar5'>
+         <input type="button" class="button rmar10" value="Update" onclick="submitIt();" />
+         <a href="#" onclick="clearIndicators();">Clear All</a>
+       </div>
+     </div>
+
+     <span id="syncHeightPullout" class="pulloutHidden">
+       <label for="syncHeight">Reset All Heights:</label>
+         <!-- '0' -->
+      <select name="syncHeight" id="syncHeight">
+              <option value=''>- Auto -</option>
+                <option value='1.0'>1.0</option>
+                <option value='0.9'>0.9</option>
+                <option value='0.8'>0.8</option>
+                <option value='0.7'>0.7</option>
+                <option value='0.6'>0.6</option>
+                <option value='0.5'>0.5</option>
+                <option value='0.4'>0.4</option>
+                <option value='0.3'>0.3</option>
+                <option value='0.2'>0.2</option>
+                <option value='0.1'>0.1</option>
+        </select>
+       <span class='workbench'><input type="button" class="button" value="Set" onclick="syncHeights();" /></span>
+     </span>
+    
+   </div>
+  </div>
+
+
+  <div class="otherChartsSection">
+    <a href="/freecharts/symbolsummary.html?sym=%24NIKK"><i class="far fa-file-invoice-dollar"></i> Symbol Summary</a> &nbsp;
+    <a href="/acp?s=%24NIKK"><i class="icon icon-scc-pos-sq-acp"></i> ACP</a> &nbsp;
+    <a href="/freecharts/pnf.php?c=%24NIKK,P&listNum="><i class="icon icon-scc-pos-sq-pnf"></i> Point &amp; Figure</a> &nbsp;
+    <a href="/freecharts/perf.php?%24NIKK"><i class="icon icon-scc-pos-sq-perfchart"></i> PerfChart</a> &nbsp;
+    <a href="/freecharts/candleglance.html?%24NIKK"><i class="icon icon-scc-pos-sq-candle"></i> CandleGlance</a> &nbsp;
+    <a href="/freecharts/seasonality.php?symbol=%24NIKK"><i class="icon icon-scc-pos-sq-season"></i> Seasonality</a> &nbsp;
+    <a href="/freecharts/gallery.html?%24NIKK"><i class="icon icon-scc-pos-sq-gallery"></i> GalleryView</a> &nbsp;
+    <a href="/freecharts/rrg/?b=$SPX&p=w&y=1&t=10&f=tail,d&s=%24NIKK"><i class="icon icon-scc-pos-sq-rrg"></i> RRG</a> &nbsp;
+    <br />&nbsp;
+  </div>
+  <div class="clear">&nbsp;</div>
+
+  <div id="IEFixSelect-container" >
+    <iframe id="IEFixSelect-bg" frameborder="0" scrolling="no">
+      <div style="display:none">&nbsp;</div>
+    </iframe>
+    <a href="#" class="containerClose" onclick="return false;"><img src="//d.stockcharts.com/img/button_x.gif" alt="[x]" /></a>
+  </div>
+
+</form>
+</div><!--sharpCharts2/-->
+
+<script type="text/javascript" language="javascript">
+  function createRows()
+  {
+                createOverRow(0,'SMA','50','','','');
+            createOverRow(1,'SMA','200','','','');
+            createOverRow(2,'','','','','');
+                          createIndRow(0,'RSI','14','above','','',
+		'','','','');
+                    createIndRow(1,'MACD','12,26,9','below','','',
+		'','','','');
+                    createIndRow(2,'','','below','','',
+		'','','','');
+  }
+
+sc2_onload();
+</script>
+
+    </div><!--scc-sc2-content-->
+</td>
+<td align="left" valign="top">
+
+<div class="googleAd">
+    <!-- Tag ID: stockcharts_300x250_300x600_Right_1 -->
+    <div align="center" class="freestar-dvrt" id="stockcharts_300x250_300x600_Right_1" style="text-align:center; margin-bottom:10px;">
+        <script data-cfasync="false" type="text/javascript">
+            if (!isLoggedIn()) { freestar.queue.push(function () { googletag.display('stockcharts_300x250_300x600_Right_1'); }); }
+        </script>
+    </div>
+    
+    <!-- Tag ID: stockcharts_300x250_300x600_Right_2 -->
+    <div align="center" class="freestar-dvrt" id="stockcharts_300x250_300x600_Right_2" style="text-align:center;">
+        <script data-cfasync="false" type="text/javascript">
+            if (freestarDisplay) { freestar.queue.push(function () { googletag.display('stockcharts_300x250_300x600_Right_2'); }); }
+        </script>
+    </div>
+    
+    <!-- Tag ID: stockcharts_300x250_Right_3 -->
+    <div align="center" class="freestar-dvrt" id="stockcharts_300x250_Right_3" style="text-align:center;">
+        <script data-cfasync="false" type="text/javascript">
+            if (freestarDisplay) { freestar.queue.push(function () { googletag.display('stockcharts_300x250_Right_3'); }); }
+        </script>
+    </div>
+</div>
+
+</td>
+</tr>
+</table>
+<div class="modal fade" tabindex="-1" role="dialog" id='linkableVersionForm'>
+    <div class="modal-dialog" role='document' id='permalink-form'>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times-circle"></i></span></button>
+                <h4 class="modal-title"><i class="fa fa-link"></i>Permalink</h4>
+            </div>
+            <div class="modal-body">
+                <p>Permalinks can be bookmarked, saved, or shared with others</p>
+
+                <input type="text" id="linkableDisplayUrl" class="form-control" value="">
+
+                <div id="permalinkCopySuccess" class="alert alert-success">Link Copied to Clipboard!</div>
+
+                <div class="btn-row">
+                    <button id="permalink-copy" type="button" class="btn btn-primary"><i class="fa fa-copy"></i>&nbsp;Copy&nbsp;Link</button>
+                    <button id="linkableReload" type="button" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Reload&nbsp;with&nbsp;Link</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ########### -->
+<!-- SHARE MODAL -->
+<!-- ########### -->
+<div class="modal fade" tabindex="-1" role="dialog" id='shareThisChartForm'>
+    <div class="modal-dialog" role='document' id='share-list'>
+        <div class="modal-dialog" role="document">
+            <div class="alert alert-danger"></div>
+            <div class="modal-content">
+                <!-- MODAL HEADER -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times-circle"></i></span></button>
+                    <h4 class="modal-title"><i class="fa fa-share-square-o"></i>Share This Chart</h4>
+                </div><!-- end of MODAL HEADER -->
+                <!-- MODAL BODY -->
+                <div class="modal-body">
+                    <p>Share this chart across your social media channel of choice, or via email</p>
+                    <!-- SHARE OPTIONS -->
+                    <div class="row share-options">
+                        <!-- FACEBOOK -->
+                        <div class="col-sm-3 col-xs-6">
+                            <a id="fblink" class="sharelink" href="#" onclick="facebookPopup(); return false;">
+                                <span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span>
+                                <div class="share-label">Facebook</div>
+                            </a>
+                        </div>
+                        <!-- TWITTER -->
+                        <div class="col-sm-3 col-xs-6">
+                            <a id="tweetlink" class="sharelink" href="#" onclick="twitterPopup(); return false;">
+                                <span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span>
+                                <div class="share-label">Twitter</div>
+                            </a>
+                        </div>
+                        <!-- LINKEDIN -->
+                        <div class="col-sm-3 col-xs-6 col-btm">
+                            <a id="linkedinlink" class="sharelink" href="#" onclick="linkedinGoTo(); return false;">
+                                <span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-linkedin fa-stack-1x fa-inverse"></i></span>
+                                <div class="share-label">LinkedIn</div>
+                            </a>
+                        </div>
+                        <!-- EMAIL -->
+                        <div class="col-sm-3 col-xs-6 col-btm">
+                            <a id="emaillink" class="sharelink" href="#" onclick="showEmailModal(); return false;">
+                                <span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i></span>
+                                <div class="share-label">Email</div>
+                            </a>
+                        </div>
+                    </div><!-- end of SHARE OPTIONS -->
+                </div><!-- end of MODAL BODY -->
+            </div>
+        </div>
+    </div><!-- end of SHARE MODAL -->
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id='shareEmailModal'>
+    <div class="modal-dialog" role='document' id='email-iframe-modal'>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times-circle"></i></span></button>
+                <h4 class="modal-title"><i class="fa fa-envelope-o"></i>Preview Email &amp; Send</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
+</div><!-- #pagebody -->
+
+<!-- SCC FOOTER -->
+<footer id="scc-footer" class="footer-blue">
+    <!-- UPPER -->
+    <div id="footer-upper">
+        <div class="container">
+            <!-- NEWSLETTER -->
+            <div id="newsletter">
+                <div class="bg-cw"></div>
+                <div class="col-lg-6 col-md-7 col-xs-12">
+                    <h4>Expert market commentary delivered right to your inbox, <span>for free.</span></h4>
+                    <p>Sign up for our weekly ChartWatchers Newsletter</p>
+                </div>
+                <div class="input-col col-lg-6 col-md-5 col-xs-12">
+                    <!-- MC SIGNUP -->
+                    <div id="mc_embed_signup" class="form-group">
+                        <form action="https://stockcharts.us17.list-manage.com/subscribe/post?u=3353671ea8af8c5eab80183ab&amp;id=7b214beb69" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                            <div id="mc_embed_signup_scroll">
+                                <div class="mc-field-group" style="display:inline-block; vertical-align:middle; width:calc(100% - 110px); margin:0 5px 0 0;">
+                                    <input type="email" value="" name="EMAIL" placeholder="Enter Your Email" class="required email form-control input-lg" id="mce-EMAIL" />
+                                </div>
+                                <div class="clear btn-row" style="display:inline-block; vertical-align:middle;">
+                                    <input type="submit" value="Sign Up" name="subscribe" id="mc-embedded-subscribe" class="button btn btn-green btn-rounded btn-md btn-margin-0" />
+                                </div>
+                                <div id="mce-responses" class="clear">
+                                    <div class="response" id="mce-error-response" style="display:none"></div>
+                                    <div class="response" id="mce-success-response" style="display:none"></div>
+                                </div>
+                                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                                <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3353671ea8af8c5eab80183ab_7b214beb69" tabindex="-1" value=""></div>
+                            </div>
+                        </form>
+                    </div><!-- end of MC SIGNUP -->
+                    <div class="more-link">
+                        <a href="/newsletter/">Learn&nbsp;More&nbsp;&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- end of UPPER -->
+    <!-- LOWER -->
+    <div id="footer-lower">
+        <div class="container">
+            <!-- SITELINKS -->
+            <div id="sitelinks" class="clearfix">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <h4>On&nbsp;StockCharts</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="/freecharts/">Charts &amp; Tools</a></li>
+                        <li><a href="/articles/">Articles</a></li>
+                        <li><a href="/tv/">StockCharts TV</a></li>
+                        <li><a href="https://school.stockcharts.com">ChartSchool</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <h4>Members</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="/def/servlet/Favorites.CServlet">Your Dashboard</a></li>
+                        <li><a href="/def/servlet/Favorites.CServlet#chartlists">Your ChartLists</a></li>
+                        <li><a href="/def/servlet/ScanUI">Advanced Scans</a></li>
+                        <li><a href="/h-mem/useralertsummary.html">Technical Alerts</a></li>
+                    </ul>
+                </div>
+                <div class="clearfix visible-sm-block"></div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <h4>Help</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="https://support.stockcharts.com">Support Center</a></li>
+                        <li><a href="https://support.stockcharts.com/doku.php?id=faqs">FAQs</a></li>
+                        <li><a href="/support/techsupport.html">Contact Us</a></li>
+                        <li><a href="/freecharts/catalog/">Symbol Catalog</a></li>
+                        <li><a href="/pricing/">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <h4>Company</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="/about/">About Us</a></li>
+                        <li><a href="/press/">Press</a></li>
+                        <li><a href="/careers/">Careers</a></li>
+                        <li><a href="https://store.stockcharts.com/">StockCharts Store</a></li>
+                    </ul>
+                </div>
+                <div class="clearfix visible-sm-block"></div>
+            </div>
+            <!-- LOGO -->
+            <div id="logo-col" class="col-xs-12">
+                <a href="/">
+                    <img src="//d.stockcharts.com/img/scc-logo-light.png" alt="StockCharts.com Logo" class="footer-logo" />
+                </a>
+                <!-- SOCIAL LINKS -->
+                <ul id="social-links" class="list-inline list-unstyled">
+                    <li><a href="https://www.facebook.com/stockchartsdotcom" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="https://twitter.com/stockcharts" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="https://www.youtube.com/user/stockchartscom" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                    <li><a href="https://www.linkedin.com/company/stockcharts.com-inc." target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                </ul>
+            </div>
+            <!-- COPYRIGHT -->
+            <div id="copyright-col" class="col-xs-12">
+                <p class="copyright">&copy;&nbsp;StockCharts.com,&nbsp;Inc. All&nbsp;Rights&nbsp;Reserved.</p>
+                <ul class="list-inline list-unstyled">
+                    <li><a href="https://support.stockcharts.com/doku.php?id=policies:terms_of_service" target="_blank">Terms&nbsp;of&nbsp;Service</a></li>
+                    <li><a href="https://support.stockcharts.com/doku.php?id=policies:privacy_statement" target="_blank">Privacy&nbsp;Statement</a></li>
+                    <li><a href="/sitemap.html" target="_blank">Site&nbsp;Map</a></li>
+                </ul>
+            </div>
+            <!-- LEGAL -->
+            <div id="legal-col" class="col-lg-10 col-lg-offset-1 col-xs-12">
+                <p class="legal">Market data provided by <b>Xignite, Inc</b>. Commodity and historical index data provided by <b>Pinnacle Data Corporation</b>. Cryptocurrency data provided by <b>CryptoCompare</b>. Unless otherwise indicated, all data is delayed by 15 minutes. The information provided by StockCharts.com, Inc. is not investment advice. Trading and investing in financial markets involves risk. You are responsible for your own investment&nbsp;decisions.</p>
+            </div>
+        </div>
+    </div><!-- end of LOWER -->
+</footer><!-- end of SCC FOOTER -->
+    
+    <!-- JAVASCIPT WARNING -->
+    <noscript>
+        <div class="alert alert-danger" role="alert">
+            <h2>Attention: your browser does not have JavaScript enabled!</h2>
+            <p><b>In order to use StockCharts.com successfully, you must enable JavaScript in your browser.</b><br /><a href="https://www.enable-javascript.com" target="_blank">Click Here</a> to learn how to enable JavaScript.</p>
+        </div>
+    </noscript>   
+<script type="text/javascript" src="//d.stockcharts.com/js/lib/jqueryplugins/jquery.colorpicker.js"></script>
+<script type="text/javascript" src="//d.stockcharts.com/js/lib/jqueryplugins/jquery.blockui.js"></script>
+<script type="text/javascript" src="//d.stockcharts.com/js/lib/jqueryplugins/jquery.popover.js"></script>
+<script type="text/javascript" src="//d.stockcharts.com/js/lib/jqueryplugins/jquery.slidebox.js"></script>
+<script type="text/javascript" src="//d.stockcharts.com/js/lib/jqueryplugins/jquery.lightbox.js"></script>
+<script type="text/javascript" src="//d.stockcharts.com/js/lib/jqueryplugins/jquery.draggablerows.js"></script>
+<script type="text/javascript" src="//d.stockcharts.com/js/lib/jqueryplugins/jquery.chartstyles.js"></script>
+<script type="text/javascript" src="//d.stockcharts.com/js/lib/jqueryplugins/jquery.ranger.js"></script>
+<script type="text/javascript" src="//d.stockcharts.com/js/inspector.js"></script>
+<script type='text/javaScript' src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type='text/javaScript' src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/ui/jquery.ui.dialog.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js"></script>
+<script type="text/javascript" src="//d.stockcharts.com/chartnotes/js/commons.js"></script>
+<script type="text/javascript" src="//d.stockcharts.com/chartnotes/js/chartnotes.js"></script>
+<script type="text/javascript" src="//d.stockcharts.com/chartnotes/js/stylepicker.js"></script>
+<script type="text/javascript" src="//d.stockcharts.com/chartnotes/js/ui.js"></script>
+<script type="text/javascript" src="//d.stockcharts.com/chartnotes/js/geometry.js"></script>
+
+<script type="text/javascript">
+    // overwrite the old chartstyle buttons with the new chartstyle buttons/crud operations
+    $('#shortcutButtons').empty().chartStyleCrud({
+        onSlideBack: function(hasMadeChanges) {
+            // reload the page when the chartstyle ui is closed (and changes have been made)
+            if(hasMadeChanges) $('#submitButton').click();
+        }, 
+        onAddNew: function(newStyleId) {
+            // a new chartstyle has been added, reload the page with the appropriate url
+            var chartSrc = chartImgSrc;
+            var query = chartSrc.substring(chartSrc.indexOf('?'));
+            var matches = /[&?]id?=([p,t]\w+)/.exec(query);
+            if(matches && matches.length==2) {
+                var url = window.location.protocol+'//' + window.location.host + '/h-sc/ui' + query.replace(matches[1], newStyleId);
+                window.location.href = url
+            }
+        }
+    });
+</script>
+
+<script type="text/javascript">
+    $(function() {
+        $('#shareThisChart').click(function(e){
+            e.preventDefault();
+            var url = '/h-sc/ui?' + _SC2GLOBALS.jsonParams + '&cmd=getlinkableversion';
+            $.getJSON(url, function(json) {
+                var schrtsUrl = json.shortUrl;
+                var longUrl = json.longUrl;
+                var symbol = json.symbol;
+                if((schrtsUrl != undefined) && (schrtsUrl != "") && (symbol != undefined)) {
+                    $('#shareThisChartForm .alert').hide();
+                    $('#shareThisChartForm .modal-content').show();
+                    shareThisChart(schrtsUrl, longUrl, symbol);
+                    $('#shareThisChartForm').modal('show');
+                } else {
+                    $('#shareThisChartForm .alert').html('<strong>There was an error creating the link for this chart.<br /><br />Please try again later.</strong>');
+                    $('#shareThisChartForm .alert').show();
+                    $('#shareThisChartForm .modal-content').hide();
+                    $('#shareThisChartForm').modal('show');
+                }
+            });
+        });
+    
+        $('#linkChart').click(function(e){
+            e.preventDefault();
+            $('#linkableVersionForm').modal('show');
+            $('#permalinkCopySuccess').hide();
+
+            var url = '/h-sc/ui?' + _SC2GLOBALS.jsonParams;
+
+            $.getJSON(url + '&cmd=getlinkableversionshort', function(json) {
+                schrtsUrl = json.shortUrl;
+                $('#linkableDisplayUrl').val(schrtsUrl);
+                $('#linkableDisplayUrl').select();
+            });
+        });
+
+        $('#linkableReload').on('click', function(){
+            var url = $('#linkableDisplayUrl').val();
+            window.location.href = url;
+        });
+        $('#permalink-copy').on('click', function(){
+            $('#linkableDisplayUrl').select();
+            try {
+              var userAgent = window.navigator.userAgent;
+              var successful = false;
+              if (userAgent.match(/safari/i) && (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i))) {
+                var el = $('#linkableDisplayUrl')[0];
+                var oldContentEditable = el.contentEditable,
+                    oldReadOnly = el.readOnly,
+                    range = document.createRange();
+
+                el.contenteditable = true;
+                el.readonly = false;
+                range.selectNodeContents(el);
+
+                var s = window.getSelection();
+                s.removeAllRanges();
+                s.addRange(range);
+                el.setSelectionRange(0, 999999); // A big number, to cover anything that could be inside the element.
+                el.contentEditable = oldContentEditable;
+                el.readOnly = oldReadOnly;
+                successful = document.execCommand('copy');            
+              } else {
+                $('#linkableDisplayUrl').focus();
+                successful = document.execCommand('copy');
+                $('#symbol').focus();
+              }
+              if (successful) {
+                $('#permalinkCopySuccess').show();
+              }
+            } catch (err) {
+              //console.warn('Oops, unable to copy permalink.');
+            }
+        });
+
+        // ranger widget   
+        $("#ranger").ranger({
+            width: SCC.cookie.read('SCCLogin2') ? 360 : 300, // free users get a smaller widget
+            inputFormat: "YYYY-MM-DD",
+            onDragStop: function(startTime, endTime) {
+                var $chart = $("#chartImg");
+                if (!$chart.length) {
+                    var url = chartImgSrc + "&r=" + new Date().getTime();
+                    $chart = $(".chartImg-container").append('<img src="' + url + '" id="chartImg"/>');
+                    if ($('#chartImgSrc').hasClass('buttons-present')) {
+                        $('#chartImg').addClass('buttons-present');
+                    }
+                }
+                // first turn off the inspector if necessary
+                if($("#useInspector:checked").length > 0) {
+                    // remove the inspector canvas from the dom and show the chart img (which was hidden)
+                    $chart.show();
+                    $('#inspector-container').remove();
+                    $('#useInspector').prop('checked', false); 
+                    SCC.cookie.dispose('inspector');
+                }
+
+                // dynamically change the url of the chart img (this loads a new chart)
+                var src = $chart.attr("src");
+                // get rid of certain url parameters and replace them with start/end times
+                var newSrc = src.replace(/&yr=\d+|&mn=\d+|&dy=\d+|&b=\d+|&g=\d+|&st=\d+-\d+-\d+|&en=\d+-\d+-\d+|en=\(?\w+\)?/gi, "");
+                if (endTime && $('#end').size() > 0 && $('#end').val() != 'today') {
+                    newSrc = newSrc.replace(/&p=(\w+)/i, "&p=$1&st=" + startTime + "&en=" + endTime);
+                } else {
+                    newSrc = newSrc.replace(/&p=(\w+)/i, "&p=$1&st=" + startTime);
+                }
+                if(newSrc != src) {
+                    chartImgSrc = newSrc; // javascript variable
+                    $("#chartImgSrc").val(newSrc); // hidden input
+                    $chart.attr("src", newSrc); // chart img
+                }
+
+                // find all of the buttons/links that do something with the chart (save, linkable version, chartnotes, add chartstyle, etc...)
+                // all of these click event handlers contain a chart img src that needs to be dynamically updated
+                var $buttons = $("input[onclick], a[onclick]");
+                $buttons.each(function() {
+                    var id = $(this).attr("id");
+                    var handler = $(this).attr("onclick");
+                    var containsChartSrc = handler.match(/s=.+&p=\w+.*&id?=\w+/);
+                    if(containsChartSrc) {
+                        var newHandler = handler.replace(/&yr=\d+|&mn=\d+|&dy=\d+|&b=\d+|&g=\d+|&st=\d+-\d+-\d+|&en=\d+-\d+-\d+|en=\(?\w+\)?/gi, "");
+                        newHandler = newHandler.replace(/&p=(\w+)/i, "&p=$1&st=" + startTime +"&en=" + endTime);
+                        $(this).attr("onclick", newHandler);
+                    }
+                });
+            }
+        });
+
+        // calendar widget
+        $("#start").one('focus',function(){
+            $( "#start" ).datepicker({
+                beforeShowDay: $.datepicker.noWeekends,
+                dateFormat: "yy-mm-dd",
+                maxDate: "+0D" ,
+                yearRange: '1990:+0',
+                showButtonPanel: true,
+                changeMonth: true,
+                constrainInput: false,
+                beforeShow: function(input, inst){
+                    if (!Date.parse($("#start").val())) {
+                        var today = new Date();
+                        var lastYear = today;
+                        lastYear.setFullYear(today.getFullYear() - 1);
+                        var original = $("#start").val();
+                        $("#start").datepicker("option", "defaultDate", lastYear );
+                        $("#start").val(original);
+                    }
+                },
+                onClose: function(){
+                    if (!isIE){
+                        $("#start").focus();
+                    }
+                },
+                changeYear: true
+            });
+            $("#start").datepicker("show");
+
+        });
+
+        $("#start").click(function() {
+            $("#start").datepicker("show");
+        });
+
+        $("#end").one('focus',function(){
+            $( "#end" ).datepicker({
+                beforeShowDay: $.datepicker.noWeekends,
+                dateFormat: "yy-mm-dd",
+                yearRange: '1990:+1',
+                showButtonPanel: true,
+                changeMonth: true,
+                constrainInput: false,
+                onClose: function(dateText, inst){
+                    var today = new Date();
+                    var dateFields = new Array();
+                    dateFields = dateText.split("-");
+                    dateText.split("-");
+                    var userDate = new Date(dateFields[1] + "/" + dateFields[2] + "/" + dateFields[0]);
+                    if (today.getMonth() == userDate.getMonth() && today.getYear() == userDate.getYear() && today.getDate() == (userDate.getDate())) {
+                        $("#end").val("(today)");
+                    }
+                    if (!isIE){
+                        $("#end").focus();
+                    }
+                },
+                changeYear: true
+            });
+            $("#end").datepicker("show");
+        });
+
+        $("#end").click(function() {
+            $("#end").datepicker("show");
+        });
+        
+        // When the user selects the full window size chart, trigger the toggleFullSize function to resize charts.
+        var checkFullSize = function() {
+            if(($('#chartSize option:selected').val() == 'window')) {
+                toggleFullSize();
+            } else {
+                return;
+            }
+        }
+
+        // When the chartSize select is changed, check if we want full window size
+        $('#chartSize').change(function(){
+            return checkFullSize();
+        });
+
+        // If full page load, check if we want full window size as well.
+        return checkFullSize();
+    
+    });
+</script>
+
+<!-- Increase height of form elements for the iPad -->
+<script>
+    $(function() {
+        // increase the height of some form elements if we are an iPad
+        if(navigator.userAgent.match(/iPad/i) != null) {
+            $("#pagebody").addClass("ios");
+        }
+    });
+</script>
+
+<!-- Handle backbround theme checkbox -->
+<script>
+    var applyBackgroundTheme = function() {      
+        var skinColorPageBg       = $('[name="skinColorPageBg"]').val();
+        var skinColorGridBg       = $('[name="skinColorGridBg"]').val();
+        var skinColorGridBgStripe = $('[name="skinColorGridBgStripe"]').val();
+        var skinColorBorder       = $('[name="skinColorBorder"]').val();
+        var skinColorText         = $('[name="skinColorText"]').val();
+        var skinColorCandles      = $('[name="skinColorCandles"]').val();
+        var skinName              = $('[name="chartSkin"]').val();
+
+        var colorBg     = "ffffff"; 
+        var colorBorder  = skinColorBorder;
+        var colorSection = "ecedef";
+        var colorLink    = "1F6B95";
+        var colorText    = skinColorText;
+        var colorHeading = colorText;
+        var colorInput   = colorText;
+        var icons        = "/img/workbench-icons-gray.png";
+
+        if((/dark|night/i).test(skinName)) { // dark schemes
+            colorBg = "000000";
+            colorSection = (skinColorGridBgStripe != "") ? skinColorGridBgStripe : "111111";
+            colorText = skinColorCandles;
+            colorHeading = skinColorCandles;
+            colorLink = "949494";
+            icons = "/img/workbench-icons-gray2.png";
+        } else if((/custom/i).test(skinName)) { // custom scheme
+            colorBg = $('[name="colorBackground"]').val();
+            colorBorder = $('[name="colorGrid"]').val();
+            colorText = $('[name="colorText"]').val();
+            colorLink = $('[name="colorIndicator"]').val();
+            colorHeading = $('[name="colorIndicator"]').val();
+        } else {
+            if(skinColorPageBg != "ffffff") {
+                colorSection = skinColorPageBg;
+            } else if(skinColorGridBg != "ffffff") {
+                colorSection = skinColorGridBg;
+            }
+            colorInput = skinColorCandles;
+        }
+
+        // page background
+        $('#sharpCharts2').css({
+            'background-color': '#'+colorBg
+        });
+        // rounded rectangles
+        $('.sectionLong, .roundedbox').css({
+            'background-color': '#'+colorSection, 
+            'border-color': '#'+colorBorder 
+        });
+        // text
+        $('#sharpCharts2, .sectionLong th, .roundedbox .label').css({
+            'color': '#'+colorText
+        });
+        // select and input elements
+        $('#sharpCharts2 select, #sharpCharts2 input').css({
+            'background-color': '#'+colorBg, 
+            'border-color': '#'+colorBorder, 
+            'color': '#'+colorInput
+        });
+        // headings
+        $('#sharpCharts2 h2').css({
+            'color': '#'+colorHeading
+        });
+        // links
+        $('#sharpCharts2 a').css({
+            'color': '#'+colorLink
+        });
+        // icons
+        $('.icon.blue').css({
+            'background-image': 'url(' + icons +')'
+        });
+        // buttons
+        $('.button').css({
+            'background-image': 'none',
+            'background-color': '#'+colorSection,
+            'color': '#'+colorInput,
+            'border-color': '#'+colorInput,
+            'text-shadow': 'none'
+        });
+        // dark schemes
+        if((/dark|night/i).test(skinName)) { 
+            $('.sharpCharts2 a.reorderB').css({'background-image':'url("/img/button_downx_dark.gif")'});
+            $('.sharpCharts2 a.reorderA').css({'background-image':'url("/img/button_upx_dark.gif")'});
+            $('.sharpCharts2 a.reorderB img').attr('src','/img/button_down_dark.gif');
+            $('.sharpCharts2 a.reorderA img').attr('src','/img/button_up_dark.gif');
+            $('#content select').css({'filter':'alpha(opacity=50)'});
+        }
+    }
+    
+    var hideBackgroundThemeCheckbox = function() {
+        if($('#useBackgroundTheme').length>0){
+            $('#useBackgroundTheme, #useBackgroundThemeLabel').addClass('hidden');
+        }
+    }
+
+    var showBackgroundThemeCheckbox = function() {
+        if($('#useBackgroundTheme').length>0){
+            $('#useBackgroundTheme, #useBackgroundThemeLabel').removeClass('hidden');
+        }
+    }
+    
+    var isBackgroundThemeSelected = function() {
+        return $('#useBackgroundTheme').length>0 && !$('#useBackgroundTheme').is(':hidden') && $('#useBackgroundTheme').is(':checked');
+    }
+
+    $(function() {
+        var isSkinable = (/dark|solar|spruce|graphite|rose/i).test($('[name=chartSkin]').val());    
+        if(isSkinable) {
+            showBackgroundThemeCheckbox();
+            if(isBackgroundThemeSelected()){
+                applyBackgroundTheme();
+            }
+        } else {
+            hideBackgroundThemeCheckbox();   
+        }
+    });
+</script>
+
+<script>
+    $(function() {
+        // refresh the t number every 30 minutes
+        // in this way, the chart should never revert to default settings after long periods of inactivity
+        setInterval(function() {
+            var $chartImg = $("#chartImg");
+            var isInspectorTurnedOn = $chartImg.length == 0;
+            var chartUrl = (isInspectorTurnedOn) ? chartImgSrc : $chartImg[0].src;
+            var match = /[&?]id?=(t\d+)/.exec(chartUrl);
+            var tNumber = (match && match[1]) ? match[1] : null;
+            // if we have a t number, send a command to the workbench (which will send a command to the style cache)
+            // this command simply resets the expire time for the t number, giving it another 45 minutes
+            if(tNumber) {
+                $.ajax({
+                    type: "POST",
+                    url: "/h-sc/crud",
+                    data: {
+                        cmd:"refreshchartstyle",
+                        styleid:tNumber
+                    },
+                    success:function(data){}
+                });
+
+            }
+        }, 1000*60*30);
+                
+        // display a lightbox warning after 8 hours of inactivity
+        // explaining that the user has been logged out
+        // this only applies if the autologin cookies are not present
+        if(SCC.cookie.read('SCCLogin2') && !SCC.cookie.read('SCCExtraID')) {
+            setTimeout(function() {
+                var msg = "Your login session has timed out. ";
+                msg +=    "This happens after 8 hours of inactivity. <br><br>";
+                msg +=    "Please visit our <a href='/login'>login page</a> to reenter your username and password.";
+                $("<div>").html(msg).lightbox({
+                    height: 120,
+                    width: 200
+                });
+            }, 1000*60*60*8); 
+        }
+    });
+    
+    var chartNotes = null;
+    var annotate = false;
+    var inspectorWasLoaded = false;
+    var autoUpdateWasOn;
+    
+    var ip = $('[name=ipaddress]').val();
+    
+    function createChartNotes() {
+        $(".chartimg").each(function () {
+            var recid = $("[name='annotation']").val();
+            var chartName = $("[name='curChartName']").val();
+            if (chartName == "") {
+                recid = 0;
+            }
+            var cc = $("[name='chartcode']").val();
+            chartNotes = new ChartNotes(this, {
+                recid: recid,
+                boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.0)",
+                colorBackground: "rgb(255, 255, 255)",
+                border: "1px solid rgb(174, 185, 197)",
+                chartCode:cc
+            });
+        });
+    }
+    
+    $('.chartimg-container').on('click', '.ChartNotesContainer', function(event){
+        var w = chartNotes.canvasWidth;
+        var o = $('#chartNotesTable').offset();
+        if (chartNotes != null && chartNotes.$canvas != null && (event.clientX < o.left || event.offsetX > o.left + w)) {
+            chartNotes.onCloseRequest();
+        }
+    }); 
+    
+    function toggleAnnotate() {
+        if (!annotate) {
+            if ($("#useInspector").prop( "checked")) {
+                    $("#useInspector").prop( "checked", false );
+                    toggleInspector();
+                    inspectorWasLoaded = true;
+            }
+            autoUpdateWasOn = !_SC2GLOBALS.refreshCancelled;
+            _SC2GLOBALS.refreshCancelled = true;
+            $("#ChartNotesMenu").fadeIn("slow");
+        } else {
+            $("#ChartNotesMenu").fadeOut("slow");
+        }
+        
+        annotate = !annotate; 
+                
+        $(".shortcutButtons").toggle("slow"); 
+        
+        if (chartNotes == null) {
+            createChartNotes();
+        }
+        
+        chartNotes.startAnnotate();
+
+        if (annotate) {
+            $(".shortcutButtons").hide();
+            
+            $('<div class="popbox" onclick="chartNotes.onCloseRequest();"></div>').css({
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: $(document).width(),
+                height: $(document).height(),
+                backgroundColor: 'black',
+                opacity: .4,
+                zIndex: 6,
+                display: 'block'
+             }).appendTo(document.getElementById('sharpCharts2'));
+
+         $('<div class="popbox" onclick="chartNotes.onCloseRequest();"></div>').css({
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: $("#chartnotes-popbox").width(),
+                height: $("#chartnotes-popbox").height(),
+                backgroundColor: 'black',
+                opacity: .4,
+                zIndex: 0,
+                display: 'block'
+             }).appendTo(document.getElementById('chartnotes-popbox'));
+        
+        } else {
+            $(".popbox").remove();
+                if (inspectorWasLoaded) {
+                    $("#useInspector").prop( "checked", true );
+                    toggleInspector();
+                }
+                if (autoUpdateWasOn) {
+                    _SC2GLOBALS.refreshCancelled = false;
+                }
+                chartNotes = null;
+        }
+    }
+    
+    $(document).ready(function() {
+        if (SCC.cookie.read('inspector') === 'on') {
+            $('#useInspector').attr('checked', 'checked');
+            openInspector();
+        }
+        createChartNotes();
+    });
+</script>
+
+<script>
+    // reset the up/down colors when we change skin
+    $('#chartSkin').on('change', function() {
+        $("#symUpColor option:selected").prop("selected", false);
+        $("#symDownColor option:selected").prop("selected", false);
+    });
+
+    RetrieveNotifications('workbench');
+</script>
+</body>
+</html>

@@ -27,7 +27,7 @@ mount directory
 ```bash
 workspace/.aws/{condential files}
 ```
-### 2. lambda-python3.9/samconfig.toml
+### 2. workspace/samconfig.toml
 put the aws condential files in this app directory.
 You can create it later form `sam deploy --guided` without creatting now.
 
@@ -46,7 +46,7 @@ capabilities = ["CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_AUTO_EXPAN
 ```
 mount directory
 ```bash
-workspace/lambda-python3.9/samconfig.toml
+workspace/samconfig.toml
 ```
 
 ## Common in Container1
@@ -54,17 +54,15 @@ workspace/lambda-python3.9/samconfig.toml
 $ service docker start
 ```
 
-## lambda-python3.9 in Container1
+## workspace in Container1
 Run functions locally and invoke them
 ```bash
-$ cd lambda-python3.9
 $ sam build
 $ sam local invoke
 ```
 
 Use the `sam local start-api` to run the API locally on port 3000.
 ```bash
-$ cd lambda-python3.9
 $ sam build
 $ sam local start-api
 ```
@@ -74,18 +72,29 @@ $ curl http://127.0.0.1:3000/hello
 ```
 To build and deploy
 ```bash
-$ cd lambda-python3.9
 $ sam build
 $ sam deploy --guided // if you do not use samconfig.toml.
 $ sam deploy // if you use samconfig.toml.
 ```
+## bin
 
+Sample toml
+```toml
+[[bin]]
+name = "stock"
+path = "src/stock.rs"
+```
+sample Command
+```bash
+cargo run --bin stock 
+cargo build --bin stock 
+cargo build --bin stock --release --target x86_64-unknown-linux-musl
+cp ./target/x86_64-unknown-linux-musl/release/comment $(ARTIFACTS_DIR)/bootstrap
+```
 
 ## Unit tests
 
 ```bash
-$ cd lambda-python3.9
-$ pip install pytest pytest-mock --user
-$ python -m pytest tests/ -v
+$ cd stock_data
+$ cargo test -- bin stock
 ```
-General information about this SAM project can be found in the [`README.md`](./lambda-python3.9/README.md) file in lambda-python3.9 folder.

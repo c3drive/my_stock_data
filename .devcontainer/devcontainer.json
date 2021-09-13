@@ -25,7 +25,8 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"amazonwebservices.aws-toolkit-vscode",
-		"matklad.rust-analyzer"
+		"bungcip.better-toml",
+		"swellaby.vscode-rust-test-adapter"
 	], 
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
