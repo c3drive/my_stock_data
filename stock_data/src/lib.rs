@@ -1,6 +1,22 @@
-use scraper::{Html, Selector};
+use std::fmt::Debug;
 
-pub fn get_links(body: String, base_url :String) -> Result<(Vec<String>), Box<dyn std::error::Error>>{
+use scraper::{Html, Selector};
+use chrono::Local;
+
+// ログ用文言を生成する関数
+pub fn make_log(func: &str, message: &str) {
+    let dt = Local::now();
+    let time = dt.format("%Y年%m月%d日 %H:%M:%S").to_string();
+    //format!("{} [function: {}], message: {} ", time, func, message)
+    println!("{} [function: {}], message: {} ", time, func, message);
+}
+
+// サーバ時刻を指定フォーマットにして返却する関数
+pub fn get_time() -> String {
+    let dt = Local::now();
+    dt.format("%Y年%m月%d日 %H:%M:%S").to_string()
+}
+pub fn get_links(body: String, base_url :String) -> Result<Vec<String>, Box<dyn std::error::Error>>{
 //pub fn get_links(body: String, base_url :String) -> Result<(), Box<dyn std::error::Error>>{
     //let response = self.client.get(url)?;
     //let base_url = response.url().clone();

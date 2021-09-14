@@ -3,9 +3,12 @@ use std::fs;
 use std::io::{Write, Read, BufWriter, BufReader, copy};
 use lambda_runtime::{handler_fn, Context, Error};
 use reqwest::StatusCode;
-use stock_data::get_links;
+use stock_data::*;
 //use serde_json::{json, Value};
 use std::collections::HashMap;
+
+use crate::get_stock_data::Interface;
+mod get_stock_data;
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
@@ -19,12 +22,17 @@ async fn main() -> Result<(), Error> {
 async fn my_handler() -> Result<(), Box<dyn std::error::Error>> {
     let param = "$NIKK";
     let url = format!("https://stockcharts.com/h-sc/ui?s={}", param);
+    let chart = get_stock_data::GetStockChart { url_base: "https://stockcharts.com/h-sc/ui".to_string(), code: "$NIKK".to_string() };
+    let encoded = chart.send().await;
+
+    println!("size: {:?}", encoded);
+
     println!("call: {}", url);
     if let Ok(res) = reqwest::get(&url).await {
         match res.status() {
             StatusCode::OK => {
                 let body = res.text().await?;
-                println!("response is \n{}", body);
+                //println!("response is \n{}", body);
                 //file_write(body);
 
                 let links = get_links(body, "https:".to_string())?;
