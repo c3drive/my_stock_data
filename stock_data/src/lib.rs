@@ -3,6 +3,7 @@ use std::fmt::Debug;
 use scraper::{Html, Selector};
 use chrono::Local;
 
+
 // ログ用文言を生成する関数
 pub fn make_log(func: &str, message: &str) {
     let dt = Local::now();

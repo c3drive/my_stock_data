@@ -7,7 +7,7 @@ use thiserror::Error;
 pub struct GetStockChart {
     pub url_base: String,
     pub code: String,
-    //pub res: Response,
+    //pub httpxml: reqwest::Response,
 }
 // struct PineApple {
 //     url_base: String,
@@ -25,17 +25,26 @@ pub trait Interface {
 }
 #[derive(Error, Debug)]
 pub enum ApiError {
-    #[error("Record not found")]
-    NotFound,
+    #[error("NotFound(404 Not Found)")]
+    NotFound(),
+
+    #[error("not 200 http return : StatusCode({0})")]
+    InterfaceException(String),
     
-    #[error("Internal server error")]
-    InternalServerError,
+    #[error("timeout error : url({0})")]
+    TimeOutError(String),
     
     #[error("Failed to get connection")]
     ConncectionPoolError(#[from] reqwest::Error),
 
-    // #[error("Failed SQL execution")]
-    // SQLiteError(#[from] rusqlite::Error),
+    #[error("Failed to send a request")]
+    SendRequest(#[source] reqwest::Error),
+
+    #[error("Failed to read the response body")]
+    ResponseBody(#[source] reqwest::Error),
+    
+    // #[error("Failed to make the link URL absolute")]
+    // AbsolutizeUrl(#[source] url::ParseError),
 }
 //impl std::error::Error for ApiError {}
 // impl fmt::Display for ApiError {
@@ -72,28 +81,31 @@ impl Interface for GetStockChart {
         make_log("send", "reqwest::get end");
         println!("Response: {:?}", resp);
 
-        // if let Ok(res) = reqwest::get(&url).await {
-        //     match res.status() {
-        //         StatusCode::OK => {
-        //            let body = res.text().await?;
-        //             println!("response is \n{}", body);
+        if let Ok(res) = reqwest::get(&url).await {
+            match res.status() {
+                StatusCode::OK => {
+                   let body = res.text().await?;
+                    //println!("response is \n{}", body);
 
-        //             let links = get_links(body, "https:".to_string())?;
-        //             for link in links.iter() {
-        //                 println!("chart: {}", link);
-        //             }
-        //         },
-        //         StatusCode::NOT_FOUND => {
-        //             println!("error: 目的のページがありませんでした。");
-        //         },
-        //         _ => {
-        //             println!("error: その他のエラーが発生しました。");
-        //         }
-        //     }
-        // } else {
-        //     println!("error: Webサーバーが見つかりませんでした。");
-        // }
-          Ok(())
+                    // let links = get_links(body, "https:".to_string())?;
+                    // for link in links.iter() {
+                    //     println!("chart: {}", link);
+                    // }
+                    return Ok(());
+                },
+                StatusCode::NOT_FOUND => {
+                    println!("error: 目的のページがありませんでした。");
+                    return Err(ApiError::NotFound());
+                },
+                _ => {
+                    println!("error: その他のエラーが発生しました。");
+                    return Err(ApiError::InterfaceException(res.status().to_string()));
+                }
+            }
+        } else {
+            println!("error: Webサーバーが見つかりませんでした。");
+            return Err(ApiError::TimeOutError(url.to_string()));
+        }
     }
     fn on_parse(&self) -> String {
         "GetStockChart parse".to_string()
