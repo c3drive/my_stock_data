@@ -1,28 +1,13 @@
-use std::collections::HashMap;
-use async_trait::async_trait;
+use async_trait::{async_trait};
 use reqwest::StatusCode;
 use stock_data::*;
 use thiserror::Error;
 
 pub struct GetStockChart {
     pub url_base: String,
-    pub code: String,
-    //pub httpxml: reqwest::Response,
+    pub code: String
 }
-// struct PineApple {
-//     url_base: String,
-//     code: String,
-// }
 
-// 抽象化（AppleTraitはget_sizeを実装する必要がある）
-#[async_trait]
-pub trait Interface {
-    //type Item;
-    type Error;
-    async fn send(&self)-> Result<(), Self::Error>;
-    fn on_parse(&self) -> String;
-    async fn get_data(&self) -> String;
-}
 #[derive(Error, Debug)]
 pub enum ApiError {
     #[error("NotFound(404 Not Found)")]
@@ -37,11 +22,14 @@ pub enum ApiError {
     #[error("Failed to get connection")]
     ConncectionPoolError(#[from] reqwest::Error),
 
-    #[error("Failed to send a request")]
-    SendRequest(#[source] reqwest::Error),
+    // #[error("Failed to send a request")]
+    // SendRequest(#[source] reqwest::Error),
 
-    #[error("Failed to read the response body")]
-    ResponseBody(#[source] reqwest::Error),
+    // #[error("Failed to read the response body")]
+    // ResponseBody(#[source] reqwest::Error),
+    
+    #[error("Failed to get chart_url")]
+    StdError(#[from] Box<dyn std::error::Error + 'static>),
     
     // #[error("Failed to make the link URL absolute")]
     // AbsolutizeUrl(#[source] url::ParseError),
@@ -65,34 +53,44 @@ pub enum ApiError {
 // }
 #[async_trait]
 impl Interface for GetStockChart {
-    //type Item = HashMap<String, String>;
+    //type GetStockChartResponse;
     //type Error2 = Box<dyn std::error::Error + 'static>;
     //type Error2 = Box<dyn ApiError + 'static>;
     type Error = ApiError;
     
-    async fn send(&self) -> Result<(), Self::Error> {
+    async fn send(&self) -> Result<GetStockChartResponse, Self::Error> {
 
         make_log("send", "start");
         let url = format!("{}?s={}", self.url_base, self.code);
 
         make_log("send", "reqwest::get start");
         println!("url: {}", url);
-        let resp = reqwest::get(&url).await?;
-        make_log("send", "reqwest::get end");
-        println!("Response: {:?}", resp);
+        //let res = reqwest::get(&url).await?;
+        //make_log("send", "reqwest::get end");
+        //println!("Response: {:?}", res);
 
         if let Ok(res) = reqwest::get(&url).await {
-            match res.status() {
-                StatusCode::OK => {
-                   let body = res.text().await?;
-                    //println!("response is \n{}", body);
+            // Check if status is within 200-299.
+            if res.status().is_success() {
+                let body = res.text().await?;
 
-                    // let links = get_links(body, "https:".to_string())?;
-                    // for link in links.iter() {
-                    //     println!("chart: {}", link);
-                    // }
-                    return Ok(());
-                },
+                // チャート画像抜き出し（1つしかない想定なので、一番最初のURLを使う）
+                let links = get_links(&body, "https:".to_string())?;
+                let url = &links[0];
+                //for link in links.iter() {
+                    //chart_url = link;
+                //     println!("chart: {}", link);
+                //}
+                let ret = GetStockChartResponse::new(
+                    String::from("success"),
+                    body,
+                    url,
+                );
+                return Ok(ret);
+            }
+            
+            // not 200 http return
+            match res.status() {
                 StatusCode::NOT_FOUND => {
                     println!("error: 目的のページがありませんでした。");
                     return Err(ApiError::NotFound());
@@ -107,46 +105,16 @@ impl Interface for GetStockChart {
             return Err(ApiError::TimeOutError(url.to_string()));
         }
     }
-    fn on_parse(&self) -> String {
-        "GetStockChart parse".to_string()
-    }
-    async fn get_data(&self) -> String {
-        "GetStockChart parse".to_string()
-    }
 }
-// impl Interface for PineApple {
-//     fn send(&self)  {
-//         let url = format!("{}?q={}", self.url_base, self.code);
-//         println!("{}", url);
-//     }
-//     fn on_parse(&self) -> String {
-//         "PineApple parse".to_string()
-//     }
-//     fn get_data(&self) -> String {
-//         "PineApple parse".to_string()
-//     }
-// }
 #[tokio::main]
 async fn main() {
-
-    println!("start");
+    println!(r#"start"#);
     let chart = GetStockChart { url_base: "https://stockcharts.com/h-sc/ui".to_string(), code: "$NIKK".to_string() };
-    let encoded = chart.send().await;
-
-    println!("size: {:?}", encoded);
-    // let encoded = match encoded {
-    //     Ok(file) => {
-    //         println!("{:#?}", file);
-    //     },
-    //     Err(error) => {
-    //         // ファイルを開く際に問題がありました
-    //         panic!("There was a problem opening the file: {:?}", error);
-    //     },
-    // };
-    //et pine_apple = PineApple { url_base: "http://google.com/".to_string(), code: "2".to_string() };
-
-    let data = chart.get_data().await;
-    println!("size1: {}", data);
-    println!("size2: {}", chart.get_data().await);
-
+    if let Ok(encoded) = chart.send().await {
+        println!("size: {:?}", encoded);
+        println!("size: {:?}", encoded.get_data());
+        println!("size: {:?}", encoded.get_url());
+    }else {
+        println!("err");
+    };
 }
