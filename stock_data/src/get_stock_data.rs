@@ -1,119 +1,70 @@
 use async_trait::{async_trait};
-use reqwest::StatusCode;
-use stock_data::*;
-use thiserror::Error;
+use lambda_http::Handler;
+use stock_data::{Interface, InterfaceTrait, InterfaceResponse};
+use std::collections::HashMap;
 
-pub struct GetStockChart {
-    pub url_base: String,
-    pub code: String
-}
-
-#[derive(Error, Debug)]
-pub enum ApiError {
-    #[error("NotFound(404 Not Found)")]
-    NotFound(),
-
-    #[error("not 200 http return : StatusCode({0})")]
-    InterfaceException(String),
-    
-    #[error("timeout error : url({0})")]
-    TimeOutError(String),
-    
-    #[error("Failed to get connection")]
-    ConncectionPoolError(#[from] reqwest::Error),
-
-    // #[error("Failed to send a request")]
-    // SendRequest(#[source] reqwest::Error),
-
-    // #[error("Failed to read the response body")]
-    // ResponseBody(#[source] reqwest::Error),
-    
-    #[error("Failed to get chart_url")]
-    StdError(#[from] Box<dyn std::error::Error + 'static>),
-    
-    // #[error("Failed to make the link URL absolute")]
-    // AbsolutizeUrl(#[source] url::ParseError),
-}
-//impl std::error::Error for ApiError {}
-// impl fmt::Display for ApiError {
-//     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-//         match *self {
-//             ApiError::NotFound => f.write_str("NotFound"),
-//             ApiError::InternalServerError => f.write_str("InternalServerError"),
-//         }
-//     }
+// pub struct GetStockChart {
+//     state: Option<Box<(dyn State + 'static + Sync + Send)>>,
+//     url_base: String,
+//     param: String,
+//     content: String,
 // }
-// impl Error for ApiError {
-//     fn description(&self) -> &str {
-//         match *self {
-//             ApiError::NotFound => "Record not found",
-//             ApiError::InternalServerError => "Internal server error",
-//         }
-//     }
-// }
-#[async_trait]
-impl Interface for GetStockChart {
-    //type GetStockChartResponse;
-    //type Error2 = Box<dyn std::error::Error + 'static>;
-    //type Error2 = Box<dyn ApiError + 'static>;
-    type Error = ApiError;
-    
-    async fn send(&self) -> Result<GetStockChartResponse, Self::Error> {
 
-        make_log("send", "start");
-        let url = format!("{}?s={}", self.url_base, self.code);
-
-        make_log("send", "reqwest::get start");
-        println!("url: {}", url);
-        //let res = reqwest::get(&url).await?;
-        //make_log("send", "reqwest::get end");
-        //println!("Response: {:?}", res);
-
-        if let Ok(res) = reqwest::get(&url).await {
-            // Check if status is within 200-299.
-            if res.status().is_success() {
-                let body = res.text().await?;
-
-                // チャート画像抜き出し（1つしかない想定なので、一番最初のURLを使う）
-                let links = get_links(&body, "https:".to_string())?;
-                let url = &links[0];
-                //for link in links.iter() {
-                    //chart_url = link;
-                //     println!("chart: {}", link);
-                //}
-                let ret = GetStockChartResponse::new(
-                    String::from("success"),
-                    body,
-                    url,
-                );
-                return Ok(ret);
-            }
-            
-            // not 200 http return
-            match res.status() {
-                StatusCode::NOT_FOUND => {
-                    println!("error: 目的のページがありませんでした。");
-                    return Err(ApiError::NotFound());
-                },
-                _ => {
-                    println!("error: その他のエラーが発生しました。");
-                    return Err(ApiError::InterfaceException(res.status().to_string()));
-                }
-            }
-        } else {
-            println!("error: Webサーバーが見つかりませんでした。");
-            return Err(ApiError::TimeOutError(url.to_string()));
-        }
+pub struct Params {}
+impl Params {
+    //fn new(q: &str, order: &str) -> HashMap<String, String> {
+    fn new(q: &str) -> HashMap<String, String> {
+        let mut params: HashMap<String, String> = HashMap::new();
+        params.insert(String::from("q"), String::from(q));
+        //params.insert(String::from("order"), String::from(order));
+        return params;
     }
 }
+
+#[derive(Debug)]
+pub struct GetStockChartResult {
+    pub chart_response: InterfaceResponse,
+    chart_url: String
+}
+
+//impl InterfaceResult for GetStockChartResult {
+impl GetStockChartResult {
+    // コンストラクタを提供することで構造体のフィールドはprivateのままとなる
+    pub fn new(chart_response: InterfaceResponse) -> Self {
+        GetStockChartResult {
+            chart_response: chart_response,
+            chart_url: "eeee".to_string(),
+        }
+    }
+    
+    fn on_parse(&self) -> String {
+        "GetStockChart parse".to_string()
+    }
+    pub fn get_url(&self) -> &String {
+        &self.chart_url
+    }
+}
+
 #[tokio::main]
 async fn main() {
-    println!(r#"start"#);
-    let chart = GetStockChart { url_base: "https://stockcharts.com/h-sc/ui".to_string(), code: "$NIKK".to_string() };
-    if let Ok(encoded) = chart.send().await {
-        println!("size: {:?}", encoded);
-        println!("size: {:?}", encoded.get_data());
-        println!("size: {:?}", encoded.get_url());
+
+    // リクエスト情報
+    let mut chart = Interface::new("https://stockcharts.com/h-sc/ui");
+    chart.add_param(Params::new("$NIKK"));
+    assert_eq!("", chart.content());
+
+    //TODO sendと融合
+    chart.send_request();
+    assert_eq!("", chart.content());
+
+    //TODO パース
+    chart.approve();
+    assert_eq!("I ate a salad for lunch today", chart.content());
+    if let Ok(chart_response) = chart.send().await {
+        //println!("size: {:?}", chart_response);
+        //println!("size: {:?}", chart_response.chart_response.get_data());
+        println!("size: {:?}", chart_response.get_url());
+        //let parse = GetStockChartResult::new(chart_response);
     }else {
         println!("err");
     };

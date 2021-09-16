@@ -14,6 +14,7 @@ reqwest = { version = "0.10", features = ["json"] }
 tokio = { version = "0.2", features = ["full"] }
 scraper = "0.12"
 async-trait = "0.1.36"
+url = { version = "2", features = ["serde"] }
 
 # Make Custom Error
 thiserror = "1.0.26"

@@ -5,9 +5,21 @@ use lambda_runtime::{Error};
 //use lambda_runtime::{handler_fn, Context, Error};
 // use reqwest::StatusCode;
 //use serde_json::{json, Value};
-use stock_data::Interface;
+use stock_data::{Interface, InterfaceTrait};
+use std::collections::HashMap;
 
 mod get_stock_data;
+
+pub struct Params {}
+impl Params {
+    //fn new(q: &str, order: &str) -> HashMap<String, String> {
+    fn new(q: &str) -> HashMap<String, String> {
+        let mut params: HashMap<String, String> = HashMap::new();
+        params.insert(String::from("q"), String::from(q));
+        //params.insert(String::from("order"), String::from(order));
+        return params;
+    }
+}
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
@@ -20,10 +32,10 @@ async fn main() -> Result<(), Error> {
 
 async fn my_handler() -> Result<(), Box<dyn std::error::Error>> {
 
-    // 株情報取得（いくつかあった場合考えるとパラメータ外出し）
-    //let param = "$NIKK";
-    //let url = format!("https://stockcharts.com/h-sc/ui?s={}", param);
-    let chart = get_stock_data::GetStockChart { url_base: "https://stockcharts.com/h-sc/ui".to_string(), code: "$NIKK".to_string() };
+    // リクエスト情報
+    let mut chart = Interface::new("https://stockcharts.com/h-sc/ui");
+    chart.add_param(Params::new("$NIKK"));
+    assert_eq!("", chart.content());
     if let Ok(encoded) = chart.send().await {
         println!("size: {:?}", encoded.get_url());
     }else {
