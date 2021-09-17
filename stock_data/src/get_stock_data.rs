@@ -17,17 +17,6 @@ impl GetStock {
         //params.insert(String::from("order"), String::from(order));
         return params;
     }
-    pub fn content(body: String) -> String {
-        // チャート画像抜き出し（1つしかない想定なので、一番最初のURLを使う）
-        let links = get_links(&body, "https:".to_string());
-        let url = &links[0];
-        return String::from(url);
-        // for link in links.iter() {
-        //     chart_url = link;
-        //     println!("chart: {}", link);
-        // }
-        //return url;
-    }
 }
 // struct GetStockChartInterface {}
 // //impl InterfaceResult for GetStockChartResult {
