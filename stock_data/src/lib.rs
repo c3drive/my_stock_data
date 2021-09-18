@@ -5,10 +5,9 @@ use reqwest::StatusCode;
 use scraper::{Html, Selector};
 use std::collections::HashMap;
 use thiserror::Error;
-use url::Url;
 
 //####################################################
-// ↓↓↓↓↓↓↓　Interface class ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+// ↓↓↓↓↓↓↓　Interface Base class ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 //####################################################
 
 #[derive(Error, Debug)]
@@ -18,21 +17,6 @@ pub enum ApiError {
 
     #[error("[ERROR] not 200 http return : code({0}), url({1})")]
     InterfaceException(String, String),
-    
-    // #[error("[ERROR] Failed to get connection: {0}")]
-    // ConncectionPoolError(#[from] reqwest::Error),
-
-    //#[error("Failed to get connection")]
-    //ConncectionPoolError(),
-    //#[error("An IO error occured: {0}")]
-    //ConncectionPoolError(#[from] reqwest::Error),
-
-    // #[error("Failed to get connection")]
-    // //ConncectionPoolError{source: reqwest::Error},
-    // ConncectionPoolError(),
-    //#[error("Read error")]
-    //ReadError { source: std::io::Error },
-    //ConncectionPoolError(#[source] reqwest::Error),
 
     #[error("[ERROR] Failed to send a request: {0}")]
     SendRequest(#[source] reqwest::Error),
@@ -46,182 +30,67 @@ pub enum ApiError {
     // #[error("Failed to make the link URL absolute")]
     // AbsolutizeUrl(#[source] url::ParseError),
 }
-
-pub struct Interface {
-    //state: Option<Box<InterfaceTrait>>,
-    //state: Option<Box<(dyn InterfaceTrait<Interface, InterfaceResponse> + 'static + Sync + Send)>>,
-    url_base: String,
-    url: String,
-    body: String,
-}
-// trait State {
-//     fn send_request(self: Box<Self>) -> Box<(dyn State + 'static + Sync + Send)>;
-//     fn approve(self: Box<Self>) -> Box<(dyn State + 'static + Sync + Send)>;
-//     fn content<'a>(&self, chart: &'a Interface) -> &'a str {
-//         ""
-//     }
-// }
-// struct SetUp {}
-
-// impl InterfaceTrait<Interface, InterfaceResponse> for SetUp {
-
-//      fn add_param<'a>(&self, infc: &mut Interface, params: HashMap<&str, &str>) {
-//          infc.url = String::from(Url::parse_with_params(&infc.url_base, params).unwrap());
-//      }
-// }
 // 抽象化（InterfaceはError, sendを実装する必要がある）
 #[async_trait]
-pub trait InterfaceTrait<I, R>: Sync + Send {
-    //type ApiError;
-    //fn new(base_url: &str)-> I;
-    fn new(url_base: &str) -> Interface {
-        Interface {
-            //state: Some(Box::new(SetUp {})),
-            url_base: String::from("url_base"),
-            url: String::from(url_base),
-            body: String::new(),
-        }
-    }
-    fn add_param(&mut self, params: HashMap<&str, &str>);
-    //fn add_param<'a>(&self, infc: &'a mut Interface, params: HashMap<&str, &str>) {
-    //fn add_param<'a>(&self, infc: &mut Interface, params: HashMap<&str, &str>) {
-    //fn add_param<'a>(&self, infc: &'a mut String, params: HashMap<&str, &str>) {
-        //self.url.push_str(Url::parse_with_params(&self.url_base, params).unwrap().as_str());
-        //infc.url = String::from(Url::parse_with_params(&infc.url_base, params).unwrap());
-    //}
-    async fn send_request(&mut self) -> Result<(), ApiError> ;
-    
-    fn on_parse(&mut self, body: String);
-    
-    fn get_data(&self) -> String;
+pub trait Interface: Sync + Send {
 
-    //fn get_data(&self) -> &str {
-    // fn get_data<'a>(&self, infc: &'a Interface)  -> &'a str {
-    //     //let infc: Interface = self.as_interface();
-    //     &infc.body
-    // }
+    // コンストラクタ
+    fn new() -> Self ;
+
+    // デフォルトは何もしない。パラメータがあれば各IFで実装
+    fn add_param(&mut self, _params: HashMap<&str, &str>) {
+        // Default
+    }
+    // HTTPリクエスト送信
+    async fn send_request(&mut self) -> Result<(), ApiError>;
+    
+    // HTMLXMLを解析し、必要なデータを抽出&contentへ格納
+    fn on_parse(&mut self, httpxml: String);
+    
+    // contentの返却
+    fn get_content(&self) -> HashMap<String, String>;
+
 }
 
-#[async_trait]
-impl InterfaceTrait<Interface, InterfaceResponse> for Interface {
-//impl Interface {
-    //type Error = Box<dyn std::error::Error + 'static>;
-    //type Error = Box<dyn ApiError + 'static>;
-    //type ApiError = ApiError;
-
-    fn new(url_base: &str) -> Interface {
-        Interface {
-            //state: Some(Box::new(SetUp {})),
-            url_base: String::from(url_base),
-            url: String::from(url_base),
-            body: String::new(),
+pub async fn send(url: &str) -> Result<String, ApiError> {
+    make_log("[INFO]", "send_request", "reqwest::get start");
+    // TODO 関数化したい
+    let result = reqwest::get(url).await;
+    let response = match result {
+        Ok(result) => result,
+        Err(e) => {
+            return Err(ApiError::SendRequest(e));
         }
-    }
-    fn add_param(&mut self, params: HashMap<&str, &str>) {
-        //self.url.push_str(Url::parse_with_params(&self.url_base, params).unwrap().as_str());
-        //self.state.as_ref().unwrap().add_param(&self, params);
-        self.url = String::from(Url::parse_with_params(&self.url_base, params).unwrap());
-    }
-    // async fn send_request(&mut self) -> Result<(), Self::Error> {
-    async fn send_request(&mut self) -> Result<(), ApiError> {
-        make_log("[INFO]", "send_request", "start");
+    };
 
-        make_log("[INFO]", "send_request", "reqwest::get start");
-        let result = reqwest::get(&self.url).await;
-        let response = match result {
-            Ok(result) => result,
+    make_log("[INFO]", "send_request", "reqwest::analyze start");
+    // Check if status is within 200-299.
+    if response.status().is_success() {
+        make_log("[INFO]", "send_request", "reqwest::text start");
+        let text = response.text().await;
+        let httpxml = match text {
+            Ok(httpxml) => httpxml,
             Err(e) => {
-                return Err(ApiError::SendRequest(e));
+                return Err(ApiError::ResponseBody(e));
             }
         };
-
-        make_log("[INFO]", "send_request", "reqwest::analyze start");
-        // Check if status is within 200-299.
-        if response.status().is_success() {
-            make_log("[INFO]", "send_request", "reqwest::text start");
-            let text = response.text().await;
-            let body = match text {
-                Ok(body) => body,
-                Err(e) => {
-                    return Err(ApiError::ResponseBody(e));
-                }
-            };
-            self.on_parse(body);
-        } else {
-            // not 200 http return
-            match response.status() {
-                StatusCode::NOT_FOUND => {
-                    println!("error: 目的のページがありませんでした。");
-                    return Err(ApiError::NotFound(response.status().to_string(), self.url.to_string()));
-                },
-                _ => {
-                    println!("error: その他のエラーが発生しました。");
-                    return Err(ApiError::InterfaceException(response.status().to_string(), self.url.to_string()));
-                }
+        return Ok(httpxml);
+    } else {
+        // not 200 http return
+        match response.status() {
+            StatusCode::NOT_FOUND => {
+                println!("error: 目的のページがありませんでした。");
+                return Err(ApiError::NotFound(response.status().to_string(), url.to_string()));
+            },
+            _ => {
+                println!("error: その他のエラーが発生しました。");
+                return Err(ApiError::InterfaceException(response.status().to_string(), url.to_string()));
             }
         }
-
-        make_log("[INFO]", "send_request", "end");
-        return Ok(());
-    }
-
-    fn on_parse(&mut self, body: String) {
-        make_log("[INFO]", "on_parse", "start");
-
-        // やることがない
-        &self.body.push_str(&body);
-        // let ret = InterfaceResponse::new(
-        //     String::from("success"),
-        //     //body,
-        //     String::from("body"),
-        //     url,
-        // );
-        // //let tmp = GetStockChartResult::new(
-        // //    ret
-        // //);
-        // //return Box::new(std::future::Future<Output =ok(tmp));
-        make_log("[INFO]", "on_parse", "end");
-    }
-
-    fn get_data(&self) -> String {
-        self.body.to_string()
-    }
-    // fn get_data<'a>(&self, infc: &'a Interface)  -> &'a str {
-    //     //let infc: Interface = self.as_interface();
-    //     &infc.body
-    // }
-}
-// 抽象化（InterfaceはError, sendを実装する必要がある）
-#[async_trait]
-pub trait InterfaceResult {
-    fn on_parse(&self) -> String;
-}
-
-#[derive(Debug)]
-pub struct InterfaceResponse {
-    response_code: String,
-    response_body: String,
-    chart_url: String, // TODO ここまで特化させるか検討だが、dobyもらったところでという問題はある
-}
-impl InterfaceResponse {
-    // コンストラクタを提供することで構造体のフィールドはprivateのままとなる
-    pub fn new(response_code: String, response_body: String, chart_url: &String) -> Self {
-        InterfaceResponse {
-            response_code: response_code,
-            response_body: response_body,
-            chart_url: String::from(chart_url),
-        }
-    }
-    pub fn get_data(&self) -> &String {
-        &self.response_body
-    }
-    pub fn get_url(&self) -> &String {
-        &self.chart_url
     }
 }
-
 //####################################################
-// ↑↑↑↑↑↑↑↑　Interface class ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+// ↑↑↑↑↑↑↑↑　Interface Base class ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 //####################################################
 
 // ログ用文言を生成する関数

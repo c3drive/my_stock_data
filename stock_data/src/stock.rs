@@ -1,14 +1,9 @@
 //! 株価データを取得するためのLambda関数プロジェクトです。
-//use std::fs;
-//use std::io::{Write, Read, BufWriter, BufReader, copy};
 use lambda_runtime::{Error};
-//use lambda_runtime::{handler_fn, Context, Error};
-// use reqwest::StatusCode;
-//use serde_json::{json, Value};
-use stock_data::{Interface, InterfaceTrait, get_links};
+use stock_data::Interface;
 use std::collections::HashMap;
-mod get_stock_data;
-use get_stock_data::GetStock;
+mod interfaces;
+use interfaces::get_stockcharts::GetStockChartsIF;
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
@@ -23,36 +18,24 @@ async fn main() -> Result<(), Error> {
 async fn my_handler() -> Result<(), Box<dyn std::error::Error>> {
 
     // SetUp
-    let mut chart = GetStock::new();
+    let mut chart = GetStockChartsIF::new();
+    let mut params= HashMap::new();
+    params.insert("q", "$NIKK");
+    chart.add_param(params);
 
     // Request
     chart.send_request().await?;
-    let body = chart.get_data();
 
-    // GetUrl
-    let link = get_url(body);
+    // Result
+    let body = chart.get_content();
+    let url = &body["url"];
+    println!("{}", url);
 
-    //let links = get_links(body, "https:".to_string())?;
-    //for link in links.iter() {
-    //    println!("chart: {}", link);
-    //}
     // 取得したurlで画像dL（部品か）
     // 保存
     //wget --secure-protocol=auto "https://stockcharts.com/c-sc/sc?s=%24NIKK&p=D&b=5&g=0&i=0&r=1631528503869" --user-agent="Mozilla/5.0"
     Ok(())
 }
-fn get_url(body: String) -> String {
-    // チャート画像抜き出し（1つしかない想定なので、一番最初のURLを使う）
-    let links = get_links(&body, "https:".to_string());
-    let url = &links[0];
-    return String::from(url);
-    // for link in links.iter() {
-    //     chart_url = link;
-    //     println!("chart: {}", link);
-    // }
-    //return url;
-}
-
 // fn file_write(string: String) {
 //     {
 //         // write

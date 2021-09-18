@@ -32,7 +32,3 @@ path = "src/main.rs"
 [[bin]]
 name = "stock"
 path = "src/stock.rs"
-
-[[bin]]
-name = "get"
-path = "src/get_stock_data.rs"
