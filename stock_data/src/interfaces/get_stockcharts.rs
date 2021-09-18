@@ -2,7 +2,7 @@ use async_trait::{async_trait};
 use stock_data::*;
 use std::collections::HashMap;
 use url::Url;
-
+use crate::interfaces::{ApiError, Interface, send};
 
 pub struct GetStockChartsIF {
     url: String,

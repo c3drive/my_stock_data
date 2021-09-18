@@ -1,6 +1,6 @@
 //! 株価データを取得するためのLambda関数プロジェクトです。
 use lambda_runtime::{Error};
-use stock_data::Interface;
+use crate::interfaces::Interface;
 use std::collections::HashMap;
 mod interfaces;
 use interfaces::get_stockcharts::GetStockChartsIF;
