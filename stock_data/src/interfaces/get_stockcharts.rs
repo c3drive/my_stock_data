@@ -22,11 +22,14 @@ impl Interface for GetStockChartsIF {
         }
     }
     
-    // オーバーライド
-    fn add_param(&mut self, params: HashMap<&str, &str>) {
+    // パラメータセット（オーバーライド）
+    fn add_param(&mut self, values: Vec<String>) {
+        let keys = vec![String::from("q"),];
+        let params: HashMap<_, _> = keys.iter().zip(values.iter()).collect();
         self.url = String::from(Url::parse_with_params(&self.url, params).unwrap());
     }
 
+    // リクエスト送信
     async fn send_request(&mut self) -> Result<(), ApiError> {
         make_log("[INFO]", "send_request", "start");
 
@@ -38,6 +41,7 @@ impl Interface for GetStockChartsIF {
         return Ok(());
     }
 
+    // レスポンスパース
     fn on_parse(&mut self, httpxml: String) {
         make_log("[INFO]", "on_parse", "start");
 
@@ -57,6 +61,7 @@ impl Interface for GetStockChartsIF {
         make_log("[INFO]", "on_parse", "end");
     }
 
+    // 返却
     fn get_content(&self) -> HashMap<String, String> {
         self.content.clone()
     }

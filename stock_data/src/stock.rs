@@ -1,7 +1,6 @@
 //! 株価データを取得するためのLambda関数プロジェクトです。
 use lambda_runtime::{Error};
 use crate::interfaces::Interface;
-use std::collections::HashMap;
 mod interfaces;
 use interfaces::get_stockcharts::GetStockChartsIF;
 
@@ -19,9 +18,8 @@ async fn my_handler() -> Result<(), Box<dyn std::error::Error>> {
 
     // SetUp
     let mut chart = GetStockChartsIF::new();
-    let mut params= HashMap::new();
-    params.insert("q", "$NIKK");
-    chart.add_param(params);
+    let values = vec![String::from("$NIKK"),];
+    chart.add_param(values);
 
     // Request
     chart.send_request().await?;

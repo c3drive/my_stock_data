@@ -33,8 +33,11 @@ pub trait Interface: Sync + Send {
     fn new() -> Self ;
 
     // デフォルトは何もしない。パラメータがあれば各IFで実装
-    fn add_param(&mut self, _params: HashMap<&str, &str>) {
+    fn add_param(&mut self, _values: Vec<String>) {
         // Default
+        //let keys = vec![String::from("key1"), String::from("key2"),..];
+        //let params: HashMap<_, _> = keys.iter().zip(values.iter()).collect();
+        //self.url = String::from(Url::parse_with_params(&self.url, params).unwrap());
     }
     // HTTPリクエスト送信
     async fn send_request(&mut self) -> Result<(), ApiError>;
