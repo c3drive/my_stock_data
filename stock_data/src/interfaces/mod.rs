@@ -1,11 +1,13 @@
 pub mod get_stockcharts;
+pub mod get_stockchartsimg;
 
 
 //####################################################
 // ↓↓↓↓↓↓↓　Interface Base class ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 //####################################################
 use async_trait::{async_trait};
-use reqwest::StatusCode;
+use bytes::Bytes;
+use reqwest::{Response, StatusCode};
 use std::collections::HashMap;
 use thiserror::Error;
 
@@ -42,14 +44,37 @@ pub trait Interface: Sync + Send {
     // HTTPリクエスト送信
     async fn send_request(&mut self) -> Result<(), ApiError>;
     
-    // HTMLXMLを解析し、必要なデータを抽出&contentへ格納
-    fn on_parse(&mut self, httpxml: String);
+    // Responseを解析し、必要なデータを抽出&contentへ格納
+    async fn on_parse(&mut self, response: Response) -> Result<(), ApiError>;
     
     // contentの返却
     fn get_content(&self) -> HashMap<String, String>;
 }
+// IF実装する際のトレイト
+#[async_trait]
+pub trait InterfaceDirect: Sync + Send {
 
-pub async fn send(url: &str) -> Result<String, ApiError> {
+    // コンストラクタ
+    fn new(url: &String) -> Self ;
+
+    // デフォルトは何もしない。パラメータがあれば各IFで実装
+    fn add_param(&mut self, _values: Vec<String>) {
+        // Default
+        //let keys = vec![String::from("key1"), String::from("key2"),..];
+        //let params: HashMap<_, _> = keys.iter().zip(values.iter()).collect();
+        //self.url = String::from(Url::parse_with_params(&self.url, params).unwrap());
+    }
+    // HTTPリクエスト送信
+    async fn send_request(&mut self) -> Result<(), ApiError>;
+    
+    // Responseを解析し、必要なデータを抽出&contentへ格納
+    async fn on_parse(&mut self, response: Response) -> Result<(), ApiError>;
+    
+    // contentの返却
+    fn get_content(&self) -> HashMap<String, Bytes>;
+}
+
+pub async fn send(url: &str) -> Result<Response, ApiError> {
     make_log("[INFO]", "send_request", "reqwest::get start");
     // TODO 関数化したい
     let result = reqwest::get(url).await;
@@ -63,15 +88,16 @@ pub async fn send(url: &str) -> Result<String, ApiError> {
     make_log("[INFO]", "send_request", "reqwest::analyze start");
     // Check if status is within 200-299.
     if response.status().is_success() {
-        make_log("[INFO]", "send_request", "reqwest::text start");
-        let text = response.text().await;
-        let httpxml = match text {
-            Ok(httpxml) => httpxml,
-            Err(e) => {
-                return Err(ApiError::ResponseBody(e));
-            }
-        };
-        return Ok(httpxml);
+        // make_log("[INFO]", "send_request", "reqwest::text start");
+        // let text = response.text().await;
+        // let httpxml = match text {
+        //     Ok(httpxml) => httpxml,
+        //     Err(e) => {
+        //         return Err(ApiError::ResponseBody(e));
+        //     }
+        // };
+        //return Ok(httpxml);
+        return Ok(response);
     } else {
         // not 200 http return
         match response.status() {

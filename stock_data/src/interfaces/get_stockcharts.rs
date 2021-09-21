@@ -1,4 +1,5 @@
 use async_trait::{async_trait};
+use reqwest::Response;
 use stock_data::*;
 use std::collections::HashMap;
 use url::Url;
@@ -24,7 +25,7 @@ impl Interface for GetStockChartsIF {
     
     // パラメータセット（オーバーライド）
     fn add_param(&mut self, values: Vec<String>) {
-        let keys = vec![String::from("q"),];
+        let keys = vec![String::from("s"),];
         let params: HashMap<_, _> = keys.iter().zip(values.iter()).collect();
         self.url = String::from(Url::parse_with_params(&self.url, params).unwrap());
     }
@@ -34,18 +35,26 @@ impl Interface for GetStockChartsIF {
         make_log("[INFO]", "send_request", "start");
 
         make_log("[INFO]", "send_request", "send start");
-        let httpxml = send(&self.url).await?;
-        self.on_parse(httpxml);
+        let response = send(&self.url).await?;
+        self.on_parse(response).await;
 
         make_log("[INFO]", "send_request", "end");
         return Ok(());
     }
 
     // レスポンスパース
-    fn on_parse(&mut self, httpxml: String) {
+    async fn on_parse(&mut self, response: Response) -> Result<(), ApiError> {
         make_log("[INFO]", "on_parse", "start");
 
-        // パースの必要なし
+        // パース
+        make_log("[INFO]", "on_parse", "reqwest::text start");
+        let text = response.text().await;
+        let httpxml = match text {
+            Ok(httpxml) => httpxml,
+            Err(e) => {
+                return Err(ApiError::ResponseBody(e));
+            }
+        };
         let body = httpxml;
 
         // チャート画像URL抜き出し（1つしかない想定なので、一番最初のURLを使う）
@@ -59,6 +68,7 @@ impl Interface for GetStockChartsIF {
         &self.content.insert(String::from("url"), url);
 
         make_log("[INFO]", "on_parse", "end");
+        return Ok(());
     }
 
     // 返却
