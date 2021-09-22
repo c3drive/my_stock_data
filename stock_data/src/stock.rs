@@ -2,6 +2,8 @@
 use lambda_runtime::{handler_fn, Context, Error};
 use serde_json::{json, Value};
 use bytes::Bytes;
+use aws_config::meta::region::RegionProviderChain;
+use aws_sdk_s3::{ByteStream, Client, Region, PKG_VERSION};
 use std::io;
 use std::fs::File;
 use crate::interfaces::{Interface, InterfaceDirect};
@@ -11,12 +13,9 @@ use interfaces::get_stockchartsimg::GetStockChartsImgIF;
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
-    // チャート画像URL取得
-    //get_stockchart_imgurl().await.unwrap_or_else(|err| eprintln!("{}", err));
-    func().await?;
     //let func = handler_fn(func);
     //lambda_runtime::run(func).await?;
-
+    func().await?;
 
     Ok(())
 }
@@ -28,11 +27,8 @@ async fn func() -> Result<Value, Error> {
     // チャート画像URL取得
     let url = get_stockchart_imgurl().await?;
 
-    // 取得したurlで画像dL（部品か）
+    // 取得したurlで画像DL（部品か）
     get_stockchart_img(&url).await?;
-    // 保存
-    //wget --secure-protocol=auto "https://stockcharts.com/c-sc/sc?s=%24NIKK&p=D&b=5&g=0&i=0&r=1631528503869" --user-agent="Mozilla/5.0"
-
 
     // S3へ格納
     Ok(json!({ "message": format!("Ok, {}!", url) }))
@@ -74,6 +70,16 @@ async fn get_stockchart_img(url: &String) -> Result<(), Error> {
     Ok(())
 
 }
+async fn s3_push() -> Result<(), Error> {
+    // let region_provider = RegionProviderChain::first_try(region.map(Region::new))
+    //     .or_default_provider()
+    //     .or_else(Region::new("us-west-2"));
+    // let shared_config = aws_config::from_env().region(region_provider).load().await;
+    // let client = Client::new(&shared_config);
+    // println!("{:?}", client);
+    Ok(())
+}
+
 async fn file_write(bytes: &Bytes) -> Result<(), Error> {
     // write
     //let string = "Hello, file io!";

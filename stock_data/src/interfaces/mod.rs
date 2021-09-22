@@ -1,5 +1,6 @@
 pub mod get_stockcharts;
 pub mod get_stockchartsimg;
+pub mod manage_s3;
 
 
 //####################################################
