@@ -44,6 +44,6 @@ path = "src/main.rs"
 name = "stock"
 path = "src/stock.rs"
 
-[[bin]]
-name = "s3"
-path = "src/interfaces/manage_s3.rs"
+# [[bin]]
+# name = "s3"
+# path = "src/interfaces/manage_s3.rs"

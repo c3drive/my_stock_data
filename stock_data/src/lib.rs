@@ -3,17 +3,20 @@ use scraper::{Html, Selector};
 
 // ログ用文言を生成する関数
 pub fn make_log(log_type: &str, func: &str, message: &str) {
-    let dt = Local::now();
-    let time = dt.format("%Y年%m月%d日 %H:%M:%S:%f").to_string();
-    //format!("{} [function: {}], message: {} ", time, func, message)
-    println!("{} {} function: {}, message: {} ", time, log_type, func, message);
+    println!("{} {} function: {}, message: {} ", get_yyyymmddhhmmssf(), log_type, func, message);
 }
 
 // サーバ時刻を指定フォーマットにして返却する関数
-pub fn get_time() -> String {
+pub fn get_yyyymmddhhmmssf() -> String {
     let dt = Local::now();
-    dt.format("%Y年%m月%d日 %H:%M:%S").to_string()
+    dt.format("%Y/%m/%d %H:%M:%S:%f").to_string()
 }
+// サーバ時刻を指定フォーマットにして返却する関数
+pub fn get_yyyymmdd() -> String {
+    let dt = Local::now();
+    dt.format("%Y%m%d").to_string()
+}
+// HTMLボディから"img[class="chartimg"]"を抽出し、base_urlと結合したURL群を生成する
 pub fn get_links(body: &String, base_url :String) -> Vec<String> {
 //pub fn get_links(body: String, base_url :String) -> Result<(), Box<dyn std::error::Error>>{
     //let response = self.client.get(url)?;

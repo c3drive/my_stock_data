@@ -13,7 +13,7 @@
  use stock_data::*;
  //use crate::interfaces::{ApiError, Interface, send};
  
- struct ManageS3IF {
+ pub struct ManageS3IF {
     /// The AWS Client.
     client: Client,
 
@@ -38,7 +38,7 @@
 impl ManageS3IF {
 
     // コンストラクタ
-    async fn new(region: Option<String>, bucket: String, key: String) -> ManageS3IF {
+    pub async fn new(region: Option<String>, bucket: String, key: String) -> ManageS3IF {
         let region_provider = RegionProviderChain::first_try(region.map(Region::new))
             .or_default_provider()
             .or_else(Region::new("ap-northeast-1"));
@@ -46,30 +46,30 @@ impl ManageS3IF {
         let shared_config = aws_config::from_env().region(region_provider).load().await;
         let client = Client::new(&shared_config);
 
-        ManageS3IF {
+        let manage = ManageS3IF {
             //region_provider: region_provider,
             //region: region,
             client: client,
             bucket: bucket,
             key: key,
             verbose: true,
-        }
-    }
-    // async fn make_client(&self) -> Client {
+        };
 
-    //     // println!();
+        println!();
     
-    //     // if opt.verbose {
-    //     //     println!("S3 client version: {}", PKG_VERSION);
-    //     //     println!("Region:            {}", shared_config.region().unwrap());
-    //     //     println!("Bucket:            {}", &opt.bucket);
-    //     //     println!("Key:               {}", &opt.key);
-    //     //     println!();
-    //     // }
-    //     return client;
-    // }
-    async fn list(&self) -> Result<(), Error> {
-        //let client = self.make_client().await;
+        if manage.verbose {
+            println!("S3 client version: {}", PKG_VERSION);
+            println!("Region:            {}", shared_config.region().unwrap());
+            println!("Bucket:            {}", &manage.bucket);
+            println!("Key:               {}", &manage.key);
+            println!();
+        }
+        return manage;
+    }
+
+    /// バケット一覧表示
+    pub async fn list(&self) -> Result<(), Error> {
+        make_log("[INFO]", "list", "start");
  
         // バケット一覧取得
         let resp = self.client.list_buckets().send().await?;
@@ -79,53 +79,52 @@ impl ManageS3IF {
         }
         Ok(())
     }
+
+    /// アップロード
+    pub async fn push(&self, path: &str) -> Result<(), Error> {
+        make_log("[INFO]", "push", "start");
+
+        // アップロードデータ
+        make_log("[INFO]", "push", "get ByteStream");
+        let body = ByteStream::from_path(Path::new(path)).await;
+    
+        // アップロード
+        make_log("[INFO]", "push", "send start");
+        match body {
+            Ok(b) => {
+                let resp = self.client
+                    .put_object()
+                    .bucket(&self.bucket)
+                    .key(&self.key)
+                    .body(b)
+                    .send()
+                    .await?;
+    
+                println!("Upload success. Version: {:?}", resp.version_id);
+    
+                let resp = self.client.get_object().bucket(&self.bucket).key(&self.key).send().await?;
+                let data = resp.body.collect().await;
+                println!("data: {:?}", data.unwrap().into_bytes());
+            }
+            Err(e) => {
+                println!("Got an error DOING SOMETHING:");
+                println!("{}", e);
+                process::exit(1);
+            }
+        }
+        Ok(())
+    }
 }
- /// Lists your buckets and uploads a file to a bucket.
- /// # Arguments
- ///
- /// * `-b BUCKET` - The bucket to which the file is uploaded.
- /// * `-k KEY` - The name of the file to upload to the bucket.
- /// * `[-r REGION]` - The Region in which the client is created.
- ///    If not supplied, uses the value of the **AWS_REGION** environment variable.
- ///    If the environment variable is not set, defaults to **us-west-2**.
- /// * `[-v]` - Whether to display additional information.
- #[tokio::main]
- async fn main() -> Result<(), Error> {
-    let opt = ManageS3IF::new(
-        None, // デフォルトを利用する
-        String::from("my-work-project-bucket"),
-        String::from("test.png"),
-    ).await;
+//  #[tokio::main]
+//  async fn main() -> Result<(), Error> {
+//     let s3 = ManageS3IF::new(
+//         None, // デフォルトを利用する
+//         String::from("my-work-project-bucket"),
+//         String::from("tmp.png"),
+//     ).await;
  
-    opt.list().await?;
+//     s3.list().await?;
+//     s3.push("tmp.png").await?;
  
- 
-     // アップロードデータ
-    //  let body = ByteStream::from_path(Path::new("test.png")).await;
- 
-    // // アップロード
-    //  match body {
-    //      Ok(b) => {
-    //          let resp = client
-    //              .put_object()
-    //              .bucket(&opt.bucket)
-    //              .key(&opt.key)
-    //              .body(b)
-    //              .send()
-    //              .await?;
- 
-    //          println!("Upload success. Version: {:?}", resp.version_id);
- 
-    //          let resp = client.get_object().bucket(opt.bucket).key(opt.key).send().await?;
-    //          let data = resp.body.collect().await;
-    //          println!("data: {:?}", data.unwrap().into_bytes());
-    //      }
-    //      Err(e) => {
-    //          println!("Got an error DOING SOMETHING:");
-    //          println!("{}", e);
-    //          process::exit(1);
-    //      }
-    //  }
- 
-     Ok(())
- }
+//     Ok(())
+//  }
