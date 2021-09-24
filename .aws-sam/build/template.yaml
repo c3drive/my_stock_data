@@ -26,5 +26,15 @@ Resources:
       PackageType: Zip
       Runtime: provided.al2
       Handler: bootstrap.is.real.handler
+      Events:
+        CWSchedule:
+          Type: Schedule
+          Properties:
+            Schedule: cron(0 21 * * ? *)
+            Name: GetStockChartDailySchedule
+            Description: get daily stockchart schedule
+            Input:
+              Fn::Sub: "{\n    \"ticker\": \"$NIKK\"\n}\n"
+            Enabled: false
     Metadata:
       BuildMethod: makefile

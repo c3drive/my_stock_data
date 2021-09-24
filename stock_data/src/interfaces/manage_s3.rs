@@ -89,7 +89,7 @@ impl ManageS3IF {
         let body = ByteStream::from_path(Path::new(path)).await;
     
         // アップロード
-        make_log("[INFO]", "push", "send start");
+        make_log("[INFO]", "put", "send start");
         match body {
             Ok(b) => {
                 let resp = self.client
