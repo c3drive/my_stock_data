@@ -1,4 +1,4 @@
-use chrono::Local;
+use chrono::{Utc, Duration};
 use scraper::{Html, Selector};
 
 // ログ用文言を生成する関数
@@ -8,12 +8,13 @@ pub fn make_log(log_type: &str, func: &str, message: &str) {
 
 // サーバ時刻を指定フォーマットにして返却する関数
 pub fn get_yyyymmddhhmmssf() -> String {
-    let dt = Local::now();
-    dt.format("%Y/%m/%d %H:%M:%S:%f").to_string()
+    //let dt = FixedOffset::east(9 * 3600);
+    let dt = Utc::now() + Duration::hours(9); // JST(UTC +0900)
+    dt.format("%Y/%m/%d %H:%M:%S%.3f").to_string()
 }
 // サーバ時刻を指定フォーマットにして返却する関数
 pub fn get_yyyymmdd() -> String {
-    let dt = Local::now();
+    let dt = Utc::now() + Duration::hours(9); // JST(UTC +0900)
     dt.format("%Y%m%d").to_string()
 }
 // HTMLボディから"img[class="chartimg"]"を抽出し、base_urlと結合したURL群を生成する

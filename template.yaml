@@ -53,7 +53,7 @@ Resources:
         CWSchedule:
           Type: Schedule
           Properties:
-            Schedule: 'cron(0 21 * * ? *)'
+            Schedule: 'cron(0 15 * * ? *)'
             Name: GetStockChartDailySchedule
             Description: get daily stockchart schedule
             #Input: !Sub '{"ticker": "$NIKK"}'

@@ -3,7 +3,6 @@
 use bytes::Bytes;
 use lambda_runtime::{handler_fn, Context, Error};
 use serde::{Deserialize, Serialize};
-use serde_json::{json, Value};
 use std::io;
 use std::fs::File;
 use crate::interfaces::{Interface, InterfaceDirect};
@@ -150,6 +149,7 @@ mod tests {
     //#[test]
     #[tokio::test]
     async fn my_handler_response() -> Result<(), Error> {
+        stock_data::make_log("[INFO]", "my_handler_response", "start");
         let ticker = "$NIKK";
         //let filename = (stock_data::get_yyyymmdd()) + ".png";
         let filename = String::from(ticker) + "_" + &(stock_data::get_yyyymmdd()) + ".png";
