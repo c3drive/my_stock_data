@@ -9,7 +9,7 @@
  use std::path::Path;
  use std::process;
 
- use async_trait::{async_trait};
+ use crate::config::config::CONFIG;
  use stock_data::*;
  //use crate::interfaces::{ApiError, Interface, send};
  
@@ -128,3 +128,22 @@ impl ManageS3IF {
  
 //     Ok(())
 //  }
+
+#[cfg(test)]
+mod tests {
+     use super::*;
+
+    #[tokio::test]
+    async fn it_env() {
+        let s3_object = String::from("stock_data/");
+    
+        // SetUp
+        let s3 = ManageS3IF::new(
+            None, // デフォルトを利用する
+            CONFIG.aws_s3_bucket.to_string(),
+            s3_object,
+        ).await;
+        assert_eq!(s3.bucket, String::from("my-work-project-bucket"));
+        //assert!(true, "always true");
+    }
+}

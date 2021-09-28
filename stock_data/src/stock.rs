@@ -1,12 +1,16 @@
 //! 株価データを取得するためのLambda関数プロジェクトです。
 
+mod interfaces;
+mod config;
+use crate::config::config::CONFIG;
+use crate::interfaces::{Interface, InterfaceDirect};
+//use crate::config::config::CONFIG;
+
 use bytes::Bytes;
 use lambda_runtime::{handler_fn, Context, Error};
 use serde::{Deserialize, Serialize};
 use std::io;
 use std::fs::File;
-use crate::interfaces::{Interface, InterfaceDirect};
-mod interfaces;
 use interfaces::get_stockcharts::GetStockChartsIF;
 use interfaces::get_stockchartsimg::GetStockChartsImgIF;
 use interfaces::manage_s3::ManageS3IF;
@@ -101,7 +105,7 @@ async fn s3_push(filename: &str) -> Result<(), Error> {
     // SetUp
     let s3 = ManageS3IF::new(
         None, // デフォルトを利用する
-        String::from("my-work-project-bucket"),
+        CONFIG.aws_s3_bucket.to_string(),
         s3_object + &filename,
     ).await;
  
@@ -148,10 +152,9 @@ mod tests {
     //async関数は#[test]では使用できない
     //#[test]
     #[tokio::test]
-    async fn my_handler_response() -> Result<(), Error> {
+    async fn func_response() -> Result<(), Error> {
         stock_data::make_log("[INFO]", "my_handler_response", "start");
         let ticker = "$NIKK";
-        //let filename = (stock_data::get_yyyymmdd()) + ".png";
         let filename = String::from(ticker) + "_" + &(stock_data::get_yyyymmdd()) + ".png";
         let event = CustomEvent{ticker: String::from(ticker),};
 
