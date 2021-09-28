@@ -86,11 +86,17 @@ Resources:
 
 Example samconfig.toml.
 ```
-parameter_overrides = "AwsS3Bucket=my-work-project-bucket"
+[default]
+[default.global.parameters]
+parameter_overrides = "Test=HelloEnv AwsS3Bucket=my-work-project-bucket"
 ```
 It does not have to be set samconfig.toml.
-patern1. not set. you must `sam deploy --parameter-overrides AwsS3Bucket=**********`.
-patern2. set. you must `sam deploy`.
+patern1. not set. 
+  you must `sam local invoke StockRustFunction --parameter-overrides Test="HelloEnv", AwsS3Bucket="**********"`.
+  you must `sam deploy --parameter-overrides Test="HelloEnv", AwsS3Bucket="**********"`.
+patern2. set. 
+  you must `sam local invoke StockRustFunction`.
+  you must `sam deploy`.
 
 mount directory
 ```bash
@@ -113,6 +119,18 @@ mount directory
 workspace/events/event.json
 ```
 
+Example samconfig.toml.
+```
+[default.local_invoke]
+[default.local_invoke.parameters]
+event = "events/event.json"
+```
+It does not have to be set samconfig.toml.
+patern1. not set. 
+  you must `sam local invoke StockRustFunction -e events/event.json`.
+patern2. set. 
+  you must `sam local invoke StockRustFunction`.
+
 ## Common in Container1
 ```bash
 $ service docker start
@@ -122,14 +140,15 @@ $ service docker start
 Run functions locally and invoke them
 ```bash
 $ sam build
-$ sam local invoke -e events/event.json --env-vars env.json StockRustFunction
+$ sam local invoke StockRustFunction -e events/event.json --parameter-overrides Test="HelloEnv", AwsS3Bucket="**********"
+$ sam local invoke StockRustFunction // if you use samconfig.toml.
 ```
 
 To build and deploy
 ```bash
 $ sam build
 $ sam deploy --guided // if you do not use samconfig.toml.
-$ sam deploy --parameter-overrides AwsS3Bucket=********** // if you do not use a parts of samconfig.toml.
+$ sam deploy --parameter-overrides Test="HelloEnv", AwsS3Bucket="**********" // if you do not use a parts of samconfig.toml.
 $ sam deploy // if you use samconfig.toml.
 ```
 ## bin
