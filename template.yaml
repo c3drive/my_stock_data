@@ -2,27 +2,63 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
   Sample rust application for Lambda
-  
+
+Parameters:
+  Test:
+    Type: String
+  AwsS3Bucket:
+    Type: String
+
 Resources:
   # HelloRustFunctionImage:
-    # Type: AWS::Serverless::Function
-    # Properties:
-    #   FunctionName: HelloRustImage
-    #   #Runtime: provided # Amazon Linux
-    #   Role: arn:aws:iam::428694349470:role/role-lambdaexec
-    #   MemorySize: 512
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     FunctionName: HelloRustImage
+  #     #Runtime: provided # Amazon Linux
+  #     Role: arn:aws:iam::428694349470:role/role-lambdaexec
+  #     MemorySize: 512
       
-    # # イメージの場合
-    #   PackageType: Image
-    # # ImageConfig:
-    # #    Command:
-    # #      - "app.lambda_handler"
-    # Metadata:
-    #   Dockerfile: Dockerfile
-    #   DockerContext: ./stock_data
-    #   DockerTag: v1
+    # イメージの場合
+  #     PackageType: Image
+  #     ImageConfig:
+  #        Command:
+  #            - "app.lambda_handler"
+  #   Metadata:
+  #     Dockerfile: Dockerfile
+  #     DockerContext: ./stock_data
+  #     DockerTag: v1
+  
+  # StockRustFunction:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     FunctionName: StockRust
+  #     #Runtime: provided # Amazon Linux
+  #     Role: arn:aws:iam::428694349470:role/role-lambdaexec
+  #     MemorySize: 512
+  #     CodeUri: ./stock_data
+  #     PackageType: Image
+  #     ImageConfig:
+  #        Command:
+  #            - "app.lambda_handler"
+  #     Environment: 
+  #       Variables:
+  #         AWS_S3_BUCKET: !Ref AWS_S3_BUCKET
+  #     Events:
+  #       CWSchedule:
+  #         Type: Schedule
+  #         Properties:
+  #           Schedule: 'cron(0 15 * * ? *)'
+  #           Name: GetStockChartDailySchedule
+  #           Description: get daily stockchart schedule
+  #           #Input: !Sub '{"ticker": "$NIKK"}'
+  #           Input:
+  #             !Sub |
+  #               {
+  #                   "ticker": "$NIKK"
+  #               }
+  #           Enabled: false # accident prevention
 
-    # Zipの場合
+  # Zipの場合
   HelloRustFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -49,6 +85,10 @@ Resources:
       PackageType: Zip
       Runtime: provided.al2 # Amazon Linux 2
       Handler: bootstrap.is.real.handler
+      Environment: 
+        Variables:
+          TEST: !Ref Test
+          AWS_S3_BUCKET: !Ref AwsS3Bucket
       Events:
         CWSchedule:
           Type: Schedule

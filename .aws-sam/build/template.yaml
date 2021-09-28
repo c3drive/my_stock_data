@@ -3,6 +3,11 @@ Transform: AWS::Serverless-2016-10-31
 Description: 'Sample rust application for Lambda
 
   '
+Parameters:
+  Test:
+    Type: String
+  AwsS3Bucket:
+    Type: String
 Resources:
   HelloRustFunction:
     Type: AWS::Serverless::Function
@@ -26,6 +31,12 @@ Resources:
       PackageType: Zip
       Runtime: provided.al2
       Handler: bootstrap.is.real.handler
+      Environment:
+        Variables:
+          TEST:
+            Ref: Test
+          AWS_S3_BUCKET:
+            Ref: AwsS3Bucket
       Events:
         CWSchedule:
           Type: Schedule

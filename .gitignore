@@ -12,6 +12,8 @@ Cargo.lock
 # Secrets
 credentials
 .env
+env.json
+samconfig.toml
 
 ### OSX ###
 *.DS_Store

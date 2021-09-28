@@ -28,7 +28,6 @@ mount directory
 workspace/.aws/{condential files}
 ```
 ### 2. workspace/samconfig.toml
-put the aws condential files in this app directory.
 You can create it later form `sam deploy --guided` without creatting now.
 
 Example samconfig.toml.
@@ -37,7 +36,7 @@ version = 0.1
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "HelloWorld-Python"
+stack_name = "xxxxxxxxxxxxxxxxxxxxxx"
 s3_bucket = "xxxxxxxxxxxxxxxxxxxxxx"
 image_repository = "xxxxxxxxxxxxxxxx"
 region = "ap-northeast-1"
@@ -49,6 +48,71 @@ mount directory
 workspace/samconfig.toml
 ```
 
+### 3. env files
+make enviroment files in this mount directory.
+
+Example .env.(use dev: cargo run)
+```
+TEST=HelloEnv
+AWS_S3_BUCKET=***********
+```
+Example env.json(use invoke: sam local invoke --env-vars env.json)
+```
+{
+    "HelloRust": {
+        "TEST": "HelloEnv!",
+        "AWS_S3_BUCKET": "***********"
+    },
+    "StockRust": {
+        "TEST": "HelloEnv!!",
+        "AWS_S3_BUCKET": "***********"
+    }
+  }
+```
+Example template.yaml(use build&deploy)
+```
+Parameters:
+  AwsS3Bucket:
+    Type: String
+
+Resources:
+  StockRustFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Environment: 
+        Variables:
+          AWS_S3_BUCKET: !Ref AwsS3Bucket
+```
+
+Example samconfig.toml.
+```
+parameter_overrides = "AwsS3Bucket=my-work-project-bucket"
+```
+It does not have to be set samconfig.toml.
+patern1. not set. you must `sam deploy --parameter-overrides AwsS3Bucket=**********`.
+patern2. set. you must `sam deploy`.
+
+mount directory
+```bash
+workspace/stock_data/.env
+workspace/env.json
+```
+
+
+### 4. event files
+make event files in this mount directory.
+
+Example event.json.(use invoke: sam local invoke --e events/event.json)
+```
+{
+    "ticker": "$NIKK"
+}
+```
+mount directory
+```bash
+workspace/events/event.json
+```
+
 ## Common in Container1
 ```bash
 $ service docker start
@@ -58,22 +122,14 @@ $ service docker start
 Run functions locally and invoke them
 ```bash
 $ sam build
-$ sam local invoke
+$ sam local invoke -e events/event.json --env-vars env.json StockRustFunction
 ```
 
-Use the `sam local start-api` to run the API locally on port 3000.
-```bash
-$ sam build
-$ sam local start-api
-```
-```
-$ curl http://127.0.0.1:3000/hello
-{"message": "hello world"}
-```
 To build and deploy
 ```bash
 $ sam build
 $ sam deploy --guided // if you do not use samconfig.toml.
+$ sam deploy --parameter-overrides AwsS3Bucket=********** // if you do not use a parts of samconfig.toml.
 $ sam deploy // if you use samconfig.toml.
 ```
 ## bin
@@ -92,9 +148,12 @@ cargo build --bin stock --release --target x86_64-unknown-linux-musl
 cp ./target/x86_64-unknown-linux-musl/release/comment $(ARTIFACTS_DIR)/bootstrap
 ```
 
-## Unit tests
+## cargo
 
 ```bash
 $ cd stock_data
-$ cargo test -- bin stock
+$ cargo run --bin stock
+$ cargo test
+$ cargo test --bin stock
+$ cargo build
 ```
