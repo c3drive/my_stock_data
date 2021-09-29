@@ -9,6 +9,11 @@ Parameters:
   AwsS3Bucket:
     Type: String
 Resources:
+  ProjectS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName:
+        Ref: AwsS3Bucket
   HelloRustFunction:
     Type: AWS::Serverless::Function
     Properties:

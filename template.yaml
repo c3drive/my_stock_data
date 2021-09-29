@@ -10,6 +10,11 @@ Parameters:
     Type: String
 
 Resources:
+  ProjectS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref AwsS3Bucket
+      
   # HelloRustFunctionImage:
   #   Type: AWS::Serverless::Function
   #   Properties:
@@ -85,10 +90,12 @@ Resources:
       PackageType: Zip
       Runtime: provided.al2 # Amazon Linux 2
       Handler: bootstrap.is.real.handler
-      Environment: 
-        Variables:
-          TEST: !Ref Test
-          AWS_S3_BUCKET: !Ref AwsS3Bucket
+      Environment:
+          Variables:
+            # TEST: TEST
+            # AWS_S3_BUCKET: AWS_S3_BUCKET
+            TEST: !Ref Test
+            AWS_S3_BUCKET: !Ref AwsS3Bucket
       Events:
         CWSchedule:
           Type: Schedule
@@ -103,6 +110,5 @@ Resources:
                     "ticker": "$NIKK"
                 }
             Enabled: false # accident prevention
-
     Metadata:
       BuildMethod: makefile

@@ -48,7 +48,7 @@ async fn func(event: CustomEvent, _: Context) -> Result<CustomOutput, Error> {
     let filename = get_stockchart_img(&event, &url).await?;
 
     // S3へ格納
-    s3_push(&filename).await?;
+    s3_push(&event, &filename).await?;
 
     Ok(CustomOutput {
         result: String::from(format!("Ok, {}!", event.ticker)),
@@ -98,9 +98,9 @@ async fn get_stockchart_img(event: &CustomEvent, url: &String) -> Result<String,
 
 
 /// S3へアップロード
-async fn s3_push(filename: &str) -> Result<(), Error> {
+async fn s3_push(event: &CustomEvent, filename: &str) -> Result<(), Error> {
     // アップロードディレクトリ
-    let s3_object = String::from("stock_data/");
+    let s3_object = String::from("stock_data/") + &event.ticker + "/";
     
     // SetUp
     let s3 = ManageS3IF::new(
@@ -126,6 +126,8 @@ fn lambda_file_dir() -> String {
 async fn file_write(event: &CustomEvent, bytes: &Bytes) -> Result<String, Error> {
     stock_data::make_log("[INFO]", "file_write", "start");
 
+    // // ファイル格納ディレクトリ生成
+    // let filedir = lambda_file_dir() + &event.ticker + "/";
     // ファイル名生成
     let filename = String::from(&event.ticker) + "_" + &(stock_data::get_yyyymmdd()) + ".png";
 

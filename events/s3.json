@@ -1,0 +1,38 @@
+{
+    "Records": [
+      {
+        "eventVersion": "2.1",
+        "eventSource": "aws:s3",
+        "awsRegion": "ap-northeast-1",
+        "eventTime": "2021-09-29T12:35:37.523Z",
+        "eventName": "ObjectCreated:Put",
+        "userIdentity": {
+          "principalId": "AWS:AROAWHUBMU2PID64MSMGG:StockRust"
+        },
+        "requestParameters": {
+          "sourceIPAddress": "54.248.9.188"
+        },
+        "responseElements": {
+          "x-amz-request-id": "V38TVB9J70XZ26CD",
+          "x-amz-id-2": "s9J3JrMTJyW4NiD25zfcb6JZoPsyDFGPb2dVHHpFtaIm6VUlQ3ZNJQmZArSTfXNcuaJC91ithRSN+8cys5DalVQeZUfMHXnl"
+        },
+        "s3": {
+          "s3SchemaVersion": "1.0",
+          "configurationId": "hello",
+          "bucket": {
+            "name": "my-work-project-bucket",
+            "ownerIdentity": {
+              "principalId": "A3C3MPNETA4CEY"
+            },
+            "arn": "arn:aws:s3:::my-work-project-bucket"
+          },
+          "object": {
+            "key": "stock_data/%24NIKK/%24NIKK_20210929.png",
+            "size": 19714,
+            "eTag": "0139f2a60b23be511ce5ed1c5b9af8ef",
+            "sequencer": "0061545D9D5976EB66"
+          }
+        }
+      }
+    ]
+  }

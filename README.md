@@ -56,22 +56,11 @@ Example .env.(use dev: cargo run)
 TEST=HelloEnv
 AWS_S3_BUCKET=***********
 ```
-Example env.json(use invoke: sam local invoke --env-vars env.json)
-```
-{
-    "HelloRust": {
-        "TEST": "HelloEnv!",
-        "AWS_S3_BUCKET": "***********"
-    },
-    "StockRust": {
-        "TEST": "HelloEnv!!",
-        "AWS_S3_BUCKET": "***********"
-    }
-  }
-```
 Example template.yaml(use build&deploy)
 ```
 Parameters:
+  Test:
+    Type: String
   AwsS3Bucket:
     Type: String
 
@@ -81,6 +70,7 @@ Resources:
     Properties:
       Environment: 
         Variables:
+          TEST: !Ref Test
           AWS_S3_BUCKET: !Ref AwsS3Bucket
 ```
 
@@ -92,8 +82,8 @@ parameter_overrides = "Test=HelloEnv AwsS3Bucket=my-work-project-bucket"
 ```
 It does not have to be set samconfig.toml.
 patern1. not set. 
-  you must `sam local invoke StockRustFunction --parameter-overrides Test="HelloEnv", AwsS3Bucket="**********"`.
-  you must `sam deploy --parameter-overrides Test="HelloEnv", AwsS3Bucket="**********"`.
+  you must `sam local invoke StockRustFunction --parameter-overrides Test="HelloEnv" AwsS3Bucket="**********"`.
+  you must `sam deploy --parameter-overrides Test="HelloEnv" AwsS3Bucket="**********"`.
 patern2. set. 
   you must `sam local invoke StockRustFunction`.
   you must `sam deploy`.
@@ -101,9 +91,7 @@ patern2. set.
 mount directory
 ```bash
 workspace/stock_data/.env
-workspace/env.json
 ```
-
 
 ### 4. event files
 make event files in this mount directory.
@@ -140,7 +128,7 @@ $ service docker start
 Run functions locally and invoke them
 ```bash
 $ sam build
-$ sam local invoke StockRustFunction -e events/event.json --parameter-overrides Test="HelloEnv", AwsS3Bucket="**********"
+$ sam local invoke StockRustFunction -e events/event.json --parameter-overrides Test="HelloEnv" AwsS3Bucket="**********"
 $ sam local invoke StockRustFunction // if you use samconfig.toml.
 ```
 
@@ -148,7 +136,7 @@ To build and deploy
 ```bash
 $ sam build
 $ sam deploy --guided // if you do not use samconfig.toml.
-$ sam deploy --parameter-overrides Test="HelloEnv", AwsS3Bucket="**********" // if you do not use a parts of samconfig.toml.
+$ sam deploy --parameter-overrides Test="HelloEnv" AwsS3Bucket="**********" // if you do not use a parts of samconfig.toml.
 $ sam deploy // if you use samconfig.toml.
 ```
 ## bin
