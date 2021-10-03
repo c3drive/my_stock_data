@@ -46,11 +46,35 @@ Resources:
         CWSchedule:
           Type: Schedule
           Properties:
-            Schedule: cron(0 15 * * ? *)
+            Schedule: cron(0 15 * * ? 1-5)
             Name: GetStockChartDailySchedule
             Description: get daily stockchart schedule
             Input:
               Fn::Sub: "{\n    \"ticker\": \"$NIKK\"\n}\n"
             Enabled: false
+    Metadata:
+      BuildMethod: makefile
+  TweetRustFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: TweetRust
+      Role: arn:aws:iam::428694349470:role/role-lambdaexec
+      MemorySize: 512
+      CodeUri: TweetRustFunction
+      PackageType: Zip
+      Runtime: provided.al2
+      Handler: bootstrap.is.real.handler
+      Events:
+        S3exampleEvent:
+          Type: S3
+          Properties:
+            Bucket:
+              Ref: ProjectS3Bucket
+            Events: s3:ObjectCreated:*
+            Filter:
+              S3Key:
+                Rules:
+                - Name: prefix
+                  Value: stock_data/%24NIKK/
     Metadata:
       BuildMethod: makefile

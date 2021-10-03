@@ -14,7 +14,7 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Ref AwsS3Bucket
-      
+
   # HelloRustFunctionImage:
   #   Type: AWS::Serverless::Function
   #   Properties:
@@ -78,6 +78,7 @@ Resources:
       Handler: bootstrap.is.real.handler
     Metadata:
       BuildMethod: makefile
+
   StockRustFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -100,7 +101,7 @@ Resources:
         CWSchedule:
           Type: Schedule
           Properties:
-            Schedule: 'cron(0 15 * * ? *)'
+            Schedule: 'cron(0 15 * * ? 1-5)'
             Name: GetStockChartDailySchedule
             Description: get daily stockchart schedule
             #Input: !Sub '{"ticker": "$NIKK"}'
@@ -110,5 +111,31 @@ Resources:
                     "ticker": "$NIKK"
                 }
             Enabled: false # accident prevention
+    Metadata:
+      BuildMethod: makefile
+
+  TweetRustFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: TweetRust
+      #Runtime: provided # Amazon Linux
+      Role: arn:aws:iam::428694349470:role/role-lambdaexec
+      MemorySize: 512
+      CodeUri: ./stock_data
+      #CodeUri: .
+      PackageType: Zip
+      Runtime: provided.al2 # Amazon Linux 2
+      Handler: bootstrap.is.real.handler
+      Events:
+        S3exampleEvent:
+          Type: S3
+          Properties:
+            Bucket: !Ref ProjectS3Bucket
+            Events: s3:ObjectCreated:*
+            Filter:
+              S3Key:
+                Rules:
+                - Name: prefix
+                  Value: stock_data/%24NIKK/
     Metadata:
       BuildMethod: makefile

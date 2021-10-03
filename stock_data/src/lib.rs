@@ -1,3 +1,6 @@
+use std::{fs::File, io::Error};
+use std::io;
+use bytes::Bytes;
 use chrono::{Utc, Duration};
 use scraper::{Html, Selector};
 
@@ -60,4 +63,20 @@ pub fn get_links(body: &String, base_url :String) -> Vec<String> {
     // }
 
     links
+}
+
+/// Lambdaにおけるファイル格納場所（ここ以外保存しようとすると権限がなくエラーになる）
+pub fn lambda_file_dir() -> String {
+    return String::from("/tmp/");
+}
+// ファイル保存し、ファイル名を返却
+pub fn write_file(filepath: &str, bytes: &Bytes) -> Result<(), Error> {
+    make_log("[INFO]", "file_write", "start");
+
+    // write
+    let mut out = File::create(&filepath)?;
+    io::copy(&mut bytes.as_ref(), &mut out)?;
+
+    // file is closed here.
+    Ok(())
 }

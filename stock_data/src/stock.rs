@@ -16,17 +16,15 @@ use interfaces::get_stockchartsimg::GetStockChartsImgIF;
 use interfaces::manage_s3::ManageS3IF;
 
 #[derive(Deserialize)]
-#[serde(rename_all = "camelCase")]
 struct CustomEvent {
     ticker: String,
 }
 
 #[derive(Serialize)]
-#[serde(rename_all = "camelCase")]
 struct CustomOutput {
     result: String,
-    imgurl: String,
-    filename: String,
+    img_url: String,
+    file_name: String,
 }
 
 #[tokio::main]
@@ -52,8 +50,8 @@ async fn func(event: CustomEvent, _: Context) -> Result<CustomOutput, Error> {
 
     Ok(CustomOutput {
         result: String::from(format!("Ok, {}!", event.ticker)),
-        imgurl: String::from(format!("{}", url)),
-        filename: String::from(format!("{}", filename)),
+        img_url: String::from(format!("{}", url)),
+        file_name: String::from(format!("{}", filename)),
     })
 }
 
@@ -90,9 +88,9 @@ async fn get_stockchart_img(event: &CustomEvent, url: &String) -> Result<String,
     let bytes = &bodys["bytes"];
 
     // ファイル保存
-    let filepath = file_write(event, bytes).await?;
+    let filename = save_file(event, bytes)?;
 
-    Ok(filepath)
+    Ok(filename)
 
 }
 
@@ -110,32 +108,22 @@ async fn s3_push(event: &CustomEvent, filename: &str) -> Result<(), Error> {
     ).await;
  
     // Request
-    let filepath = lambda_file_dir() + filename;
+    let filepath = stock_data::lambda_file_dir() + filename;
     s3.push(&filepath).await?;
 
     Ok(())
 }
 
 
-/// Lambdaにおけるファイル格納場所（ここ以外保存しようとすると権限がなくエラーになる）
-fn lambda_file_dir() -> String {
-    return String::from("/tmp/");
-}
-
 // ファイル保存し、ファイル名を返却
-async fn file_write(event: &CustomEvent, bytes: &Bytes) -> Result<String, Error> {
-    stock_data::make_log("[INFO]", "file_write", "start");
-
-    // // ファイル格納ディレクトリ生成
-    // let filedir = lambda_file_dir() + &event.ticker + "/";
+fn save_file(event: &CustomEvent, bytes: &Bytes) -> Result<String, Error> {
     // ファイル名生成
     let filename = String::from(&event.ticker) + "_" + &(stock_data::get_yyyymmdd()) + ".png";
 
     // ファイル格納ディレクトリパス＋ファイル名
-    let filepath = lambda_file_dir() + &filename;
+    let filepath = stock_data::lambda_file_dir() + &filename;
     // write
-    let mut out = File::create(&filepath)?;
-    io::copy(&mut bytes.as_ref(), &mut out)?;
+    stock_data::write_file(&filepath, &bytes)?;
 
     // file is closed here.
     Ok(filename)
@@ -157,7 +145,7 @@ mod tests {
     async fn func_response() -> Result<(), Error> {
         stock_data::make_log("[INFO]", "my_handler_response", "start");
         let ticker = "$NIKK";
-        let filename = String::from(ticker) + "_" + &(stock_data::get_yyyymmdd()) + ".png";
+        let file_name = String::from(ticker) + "_" + &(stock_data::get_yyyymmdd()) + ".png";
         let event = CustomEvent{ticker: String::from(ticker),};
 
         // 実行
@@ -166,12 +154,12 @@ mod tests {
         // 結果
         let json = CustomOutput {
             result: String::from(format!("Ok, {}!", ticker)),
-            imgurl: String::from(format!("{}", "No Testable")),
-            filename: String::from(format!("{}", filename)),
+            img_url: String::from(format!("{}", "No Testable")),
+            file_name: String::from(format!("{}", file_name)),
         };
         // アサーション
         assert_eq!(response.result, json.result);
-        assert_eq!(response.filename, json.filename);
+        assert_eq!(response.file_name, json.file_name);
 
         Ok(())
     }

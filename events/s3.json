@@ -27,7 +27,7 @@
             "arn": "arn:aws:s3:::my-work-project-bucket"
           },
           "object": {
-            "key": "stock_data/%24NIKK/%24NIKK_20210929.png",
+            "key": "stock_data/$NIKK/$NIKK_20211002.png",
             "size": 19714,
             "eTag": "0139f2a60b23be511ce5ed1c5b9af8ef",
             "sequencer": "0061545D9D5976EB66"
