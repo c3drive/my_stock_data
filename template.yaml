@@ -8,6 +8,16 @@ Parameters:
     Type: String
   AwsS3Bucket:
     Type: String
+  ConsumerKey:
+    Type: String
+  ConsumerSecret:
+    Type: String
+  BearerToken:
+    Type: String
+  AccessToken:
+    Type: String
+  AccessTokenSecret:
+    Type: String
 
 Resources:
   ProjectS3Bucket:
@@ -97,6 +107,11 @@ Resources:
             # AWS_S3_BUCKET: AWS_S3_BUCKET
             TEST: !Ref Test
             AWS_S3_BUCKET: !Ref AwsS3Bucket
+            CONSUMER_KEY: !Ref ConsumerKey
+            CONSUMER_SECRET: !Ref ConsumerSecret
+            BEARER_TOKEN: !Ref BearerToken
+            ACCESS_TOKEN: !Ref AccessToken
+            ACCESS_TOKEN_SECRET: !Ref AccessTokenSecret
       Events:
         CWSchedule:
           Type: Schedule
