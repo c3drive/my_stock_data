@@ -66,7 +66,7 @@ Resources:
         CWSchedule:
           Type: Schedule
           Properties:
-            Schedule: cron(0 15 * * ? 1-5)
+            Schedule: cron(0 15 ? * MON-FRI *)
             Name: GetStockChartDailySchedule
             Description: get daily stockchart schedule
             Input:
@@ -84,6 +84,22 @@ Resources:
       PackageType: Zip
       Runtime: provided.al2
       Handler: bootstrap.is.real.handler
+      Environment:
+        Variables:
+          TEST:
+            Ref: Test
+          AWS_S3_BUCKET:
+            Ref: AwsS3Bucket
+          CONSUMER_KEY:
+            Ref: ConsumerKey
+          CONSUMER_SECRET:
+            Ref: ConsumerSecret
+          BEARER_TOKEN:
+            Ref: BearerToken
+          ACCESS_TOKEN:
+            Ref: AccessToken
+          ACCESS_TOKEN_SECRET:
+            Ref: AccessTokenSecret
       Events:
         S3exampleEvent:
           Type: S3
