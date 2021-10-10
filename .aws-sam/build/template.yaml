@@ -71,7 +71,7 @@ Resources:
             Description: get daily stockchart schedule
             Input:
               Fn::Sub: "{\n    \"ticker\": \"$NIKK\"\n}\n"
-            Enabled: false
+            Enabled: true
     Metadata:
       BuildMethod: makefile
   TweetRustFunction:

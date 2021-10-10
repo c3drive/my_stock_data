@@ -125,7 +125,7 @@ Resources:
                 {
                     "ticker": "$NIKK"
                 }
-            Enabled: false # accident prevention
+            Enabled: True
     Metadata:
       BuildMethod: makefile
 
