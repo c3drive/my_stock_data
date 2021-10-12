@@ -6,6 +6,7 @@ use chrono::DateTime;
 use lambda_runtime::{handler_fn, Context, Error};
 use serde::{Deserialize, Serialize};
 use std::{collections::HashMap, fs::File, io::{BufReader, Read}};
+use percent_encoding::{percent_decode_str};
 
 use interfaces::manage_s3::ManageS3IF;
 use interfaces::post_tweet::PostTweetIF;
@@ -97,11 +98,14 @@ async fn func(event: S3PutEvent, _: Context) -> Result<CustomOutput, Error> {
 }
 /// S3からダウンロード
 async fn get_image(s3_data: &S3Data) -> Result<Bytes, Error> {
+    // decode ex:stock_data/%24NIKK/%24NIKK_20211012.png ->stock_data/$NIKK/$NIKK_20211012.png
+    let s3key = percent_decode_str(&s3_data.object.key);
+    let decoded = s3key.decode_utf8()?;
     // SetUp
     let s3 = ManageS3IF::new(
         None, // デフォルトを利用する
         s3_data.bucket.name.to_string(),
-        s3_data.object.key.to_string(),
+        decoded.to_string(),
     ).await;
  
     // Request

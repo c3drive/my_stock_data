@@ -74,20 +74,20 @@ Resources:
   #           Enabled: false # accident prevention
 
   # Zipの場合
-  HelloRustFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: HelloRust
-      #Runtime: provided # Amazon Linux
-      Role: arn:aws:iam::428694349470:role/role-lambdaexec
-      MemorySize: 512
-      CodeUri: ./stock_data
-      #CodeUri: .
-      PackageType: Zip
-      Runtime: provided.al2 # Amazon Linux 2
-      Handler: bootstrap.is.real.handler
-    Metadata:
-      BuildMethod: makefile
+  # HelloRustFunction:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     FunctionName: HelloRust
+  #     #Runtime: provided # Amazon Linux
+  #     Role: arn:aws:iam::428694349470:role/role-lambdaexec
+  #     MemorySize: 512
+  #     CodeUri: ./stock_data
+  #     #CodeUri: .
+  #     PackageType: Zip
+  #     Runtime: provided.al2 # Amazon Linux 2
+  #     Handler: bootstrap.is.real.handler
+  #   Metadata:
+  #     BuildMethod: makefile
 
   StockRustFunction:
     Type: AWS::Serverless::Function
