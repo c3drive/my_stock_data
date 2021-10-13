@@ -2,7 +2,7 @@ mod interfaces;
 mod config;
 
 use bytes::Bytes;
-use chrono::DateTime;
+use chrono::{DateTime, FixedOffset};
 use lambda_runtime::{handler_fn, Context, Error};
 use serde::{Deserialize, Serialize};
 use std::{collections::HashMap, fs::File, io::{BufReader, Read}};
@@ -82,11 +82,12 @@ async fn func(event: S3PutEvent, _: Context) -> Result<CustomOutput, Error> {
     let byte = get_image(s3_data).await?;
 
     // tweet
-    let dt = DateTime::parse_from_rfc3339(time)?;
-    let datetime = dt.format("%Y年%m月%d日 %H時%M分").to_string();
-    let text = String::from("日経平均株価　INDEXNIKKEI: NI225\n") + &datetime + "時点(©StockCharts)"; 
+    let aws_time_gmt = DateTime::parse_from_rfc3339(time)?;
+    let japan_time_jst = aws_time_gmt.with_timezone(&FixedOffset::east(9*3600));
+    let datetime = japan_time_jst.format("%Y年%m月%d日 %H時%M分").to_string();
+    let text = String::from("日経平均株価　INDEXNIKKEI: NI225\n") + &datetime + "時点(©StockCharts)";
+
     let bodys = tweet(text, byte).await?;
-    let url = &bodys["url"];
 
     Ok(CustomOutput {
         result: String::from(format!("Ok!")),
